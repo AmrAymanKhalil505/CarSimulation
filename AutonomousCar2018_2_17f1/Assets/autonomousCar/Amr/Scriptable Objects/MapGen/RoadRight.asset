@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: RoadRight
+  m_EditorClassIdentifier: Assembly-CSharp::RoadSTObject
+  RoadObj: {fileID: 1315142372487122, guid: 2bc0c248e1407544a968595d050cda17, type: 2}
+  RoadName: Right
+  Percentage: 1
+  SizeMin: {x: -56, y: 0, z: -56}
+  SizeMax: {x: 56, y: 0, z: 56}
+  CorrectPosition: {x: 0, y: 0, z: 0}
+  OffestInToCenter: 60
+  OffestOutToCenter: 60
+  DirectionIn: {x: 0, y: 0, z: 0}
+  DirectionOut: {x: 0, y: 90, z: 0}
+  CurPosition: {x: 0, y: 0, z: 0}
+  CurRotation: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
+  initRotation: {x: -90, y: 90, z: 0}
+  SuitableNextTileSet:
+  - Ahead
+  - Cross
+  - Left
+  - Right
