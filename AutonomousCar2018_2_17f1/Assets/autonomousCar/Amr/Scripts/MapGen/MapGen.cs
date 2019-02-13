@@ -20,12 +20,14 @@ public class MapGen : MonoBehaviour {
 	public int GeneratedMapLen;
 	public Vector3 MapStart;
 	public Vector3 MapEnd;
-	private ArrayList  GeneratedMap;
+	public ArrayList  GeneratedMap;
 	private bool WorkOnMap =false;
 
 	int NOI = 0;
 
 	static float EPS = 1E-9f;
+
+	TrafficManager TM ;
 	void Start () {
 		AvailableRoads=new ArrayList();
 		GeneratedMap=new ArrayList();
@@ -36,14 +38,12 @@ public class MapGen : MonoBehaviour {
 		AvailableRoads.Add(RoadLeft);
 		AvailableRoads.Add(RoadCross);
 
+		TM= GetComponent<TrafficManager>();
 		CreateMap();
+		TM.initNodes();
 
 	}
 	
-	
-	void Update () {
-		
-	}
 
 	void CreateMap(){
 		int GridIndex = 0;
@@ -211,19 +211,19 @@ public class MapGen : MonoBehaviour {
 		return true;
 	}
 	bool isCollisionUsingSegments(Vector3 l1, Vector3 r1,Vector3 l2 ,Vector3 r2){
-		Point R1P1 = new Point(l1.x,l1.z);
-		Point R1P2 = new Point(r1.x,l1.z);
-		Point R1P3 = new Point(r1.x,r1.z);
-		Point R1P4 = new Point(l1.x,r1.z);
+		Point R1P0 = new Point(l1.x,l1.z);
+		Point R1P1 = new Point(r1.x,l1.z);
+		Point R1P2 = new Point(l1.x,r1.z);
+		Point R1P3= new Point(r1.x,r1.z);
 
 
-		Point R2P1 = new Point(l2.x,l2.z);
+		Point R2P0 = new Point(l2.x,l2.z);
+		Point R2P1 = new Point(l2.x,r2.z);
 		Point R2P2 = new Point(r2.x,l2.z);
 		Point R2P3 = new Point(r2.x,r2.z);
-		Point R2P4 = new Point(l2.x,r2.z);
 
-		LineSegment [] rectangle1 = {new LineSegment(R1P1,R1P2),new LineSegment(R1P2,R1P3),new LineSegment(R1P3,R1P4),new LineSegment(R1P4,R1P1)};
-		LineSegment [] rectangle2 = {new LineSegment(R2P1,R2P2),new LineSegment(R2P2,R2P3),new LineSegment(R2P3,R2P4),new LineSegment(R2P4,R2P1)};
+		LineSegment [] rectangle1 = {new LineSegment(R1P0,R1P1),new LineSegment(R1P0,R1P2),new LineSegment(R1P2,R1P3),new LineSegment(R1P3,R1P1)};
+		LineSegment [] rectangle2 = {new LineSegment(R2P0,R2P1),new LineSegment(R2P0,R2P2),new LineSegment(R2P2,R2P3),new LineSegment(R2P3,R2P1)};
 		for(int i=0;i<rectangle1.Length;i++){
 			for(int j=i;j<rectangle2.Length;j++){
 				if(rectangle1[i].intersect(rectangle2[j])){
@@ -233,8 +233,7 @@ public class MapGen : MonoBehaviour {
 		}
 		return false;
 	}
-
-	struct Point {
+	public class Point {
 		public float x, y;
 		public bool isValid;
 		public Point (float xx,float yy){
@@ -248,6 +247,7 @@ public class MapGen : MonoBehaviour {
 		}
 
 	}
+
 	struct Line {
 		float a, b, c;
 		public Line(Point p, Point q) {

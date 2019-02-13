@@ -23,4 +23,14 @@ public class RoadSTObject : ScriptableObject {
 	public Vector3 initPosition;
 	public Vector3 initRotation;
 	public  string [] SuitableNextTileSet;
+
+	public Vector3 [] TrafficNodes;
+	public float LengthRight;
+	public float LengthLeft;
+	public int NumLerpNodes;
+	public bool isBezierCurve;
+
+	public Vector3 [] TrafficBNodes;
+	public Vector3 [] TrafficBRNodes;
+
 }

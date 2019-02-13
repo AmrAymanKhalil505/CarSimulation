@@ -30,3 +30,10 @@ MonoBehaviour:
   - Cross
   - Left
   - Right
+  TrafficNodes:
+  - {x: 0, y: 0, z: -60}
+  - {x: 0, y: 0, z: 60}
+  LengthRight: 30
+  LengthLeft: 30
+  NumLerpNodes: 3
+  isBezierCurve: 0
