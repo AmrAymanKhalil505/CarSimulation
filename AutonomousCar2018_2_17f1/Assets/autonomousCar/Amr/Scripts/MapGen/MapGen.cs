@@ -5,28 +5,38 @@ using UnityEngine;
 
 public class MapGen : MonoBehaviour {
 	[Header("Car Setting")]
+	//Car which RL agent will run on 
 	public GameObject Car;
+	//the position will it appear in a the first of the simulation 
 	public Vector3 CarInitPosition;
 
 	[Header ("Roads")]
+	//Roads that will be used to as tilesets
 	public RoadSTObject RoadAhead;
 	public RoadSTObject RoadRight;
 	public RoadSTObject RoadLeft;
 	public RoadSTObject RoadCross;
+	//Array that will hold all the tilesets
 	private ArrayList AvailableRoads;
 	
+
 	[Header ("Map Setting")]
-	
+	// number of tilesets that should spawn in the map at the end 
 	public int GeneratedMapLen;
+	//allowed size for the map
 	public Vector3 MapStart;
 	public Vector3 MapEnd;
+	//the array that will have the generated tilesets as scriptable objects
 	public ArrayList  GeneratedMap;
 	private bool WorkOnMap =false;
 
+	// counter to see the number of clones of the scriptabe objects to make sure that the ram is never full
 	int NOI = 0;
 
+	// small number near to zero that will be used to handle collisions 
 	static float EPS = 1E-9f;
 
+	// each map generation object parent should have traffic manager 
 	TrafficManager TM ;
 	void Start () {
 		AvailableRoads=new ArrayList();
@@ -37,7 +47,7 @@ public class MapGen : MonoBehaviour {
 		AvailableRoads.Add(RoadRight);
 		AvailableRoads.Add(RoadLeft);
 		AvailableRoads.Add(RoadCross);
-
+		// TODO handle Null TM 
 		TM= GetComponent<TrafficManager>();
 		CreateMap();
 		TM.initNodes();
@@ -58,59 +68,17 @@ public class MapGen : MonoBehaviour {
 		print(NOI);
 	}
 
-	/*void addRoad(RoadSTObject rsto){
-		Vector3 CurTileSetPosition= rsto.RoadObj.transform.position;
-		Vector3 CurTileSetRotation = rsto.RoadObj.transform.rotation.eulerAngles;
-	 	Quaternion curRot= Quaternion.Euler(CurTileSetRotation.x,CurTileSetRotation.y,CurTileSetRotation.z);
-		Vector3 outPoint =curRot * rsto.PositionOffestOut;
-
-		ArrayList ChoosenRoads =(ArrayList) AvailableRoads.Clone();
-		
-		for(int i=0;i<ChoosenRoads.Count;i++){
-			int index =System.Array.IndexOf(rsto.SuitableNextTileSet,((RoadSTObject)ChoosenRoads[i]).RoadName);
-			if(index ==-1){
-				ChoosenRoads.RemoveAt(i);i--;
-			}
-		}
-		bool isSuitableRoad =false; 
-		while(!isSuitableRoad || ChoosenRoads.Count<1){
-			int index = Random.Range(0,ChoosenRoads.Count);
-			RoadSTObject newTileset =(RoadSTObject) Object.Instantiate((Object)((ChoosenRoads[index])));
-
-			Vector3 newTitlsetPosition =newTileset.RoadObj.transform.position;
-			Quaternion newTitlsetRotation =newTileset.RoadObj.transform.rotation;
-			Vector3 inNewPoint =curRot*newTileset.PositionOffestIn+ CurTileSetPosition+ outPoint;
-			newTileset.CurPosition = inNewPoint;
-			newTileset.CurRotation = curRot.eulerAngles + rsto.RotationOffestOut;
-			bool isCol = false;
-			for(int i=0;i<GeneratedMap.Count;i++){
-				if(isCollision((RoadSTObject)GeneratedMap[i], newTileset)){
-					isCol=true;
-				}
-			}
-			if(isCol){
-				ChoosenRoads.RemoveAt(index);
-				NOI++;
-				if(NOI>1000){
-					break;
-				}
-			}
-			else{
-				isSuitableRoad = true;
-				GameObject RoadTemp =Instantiate(newTileset.RoadObj);
-				RoadTemp.transform.position= newTileset.CurPosition;
-				RoadTemp.transform.rotation= Quaternion.Euler( newTileset.CurRotation.x, newTileset.CurRotation.y, newTileset.CurRotation.z);;
-				newTileset.RoadObj= RoadTemp;
-				GeneratedMap.Add(newTileset);
-			}
-		}
-		if(isSuitableRoad){
-			return;
-		}else{
-			print("making map failed");
-		}
-	}*/
+	/*
+		Name: addRoad
+		Description: adds a new tileset of type RoadSTObject to the map according to the given RoadSTObject  
+		Inputs: RoadSTObject rtso 
+					the given RoadSTObject to make new Tileset according to
+	 */
 	void addRoad(RoadSTObject rsto){
+		/*
+			this part get all the suitable Tilesets that can be added next to the given RoadSTObject
+			and put it in ChoosenRoads ArrayList
+		 */
 		ArrayList ChoosenRoads =(ArrayList) AvailableRoads.Clone();
 		for(int i=0;i<ChoosenRoads.Count;i++){
 			int index =System.Array.IndexOf(rsto.SuitableNextTileSet,((RoadSTObject)ChoosenRoads[i]).RoadName);
@@ -118,15 +86,24 @@ public class MapGen : MonoBehaviour {
 				ChoosenRoads.RemoveAt(i);i--;
 			}
 		}
+		/*
+			choose one suitable road that you can added without colliding with other tileset
+		 	if all the roads will collide then return error
+		 */
+
 		bool isSuitableRoad =false; 
 		while(!isSuitableRoad && ChoosenRoads.Count>0){
+			//choose one index randomly
 			int index = Random.Range(0,ChoosenRoads.Count);
+			//make a copy out of that road
 			RoadSTObject newTileset =(RoadSTObject) Object.Instantiate((Object)((ChoosenRoads[index])));
+			
 			Vector3 tempNode = rsto.CurPosition;
-			//moving the center point to the edge
+			//starting a origin moving the center point to the edge
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(rsto.OffestOutToCenter*Vector3.forward);
 			print("move to the edge"+tempNode);
-			//moving from the edge to the new center 
+			//moving from the edge to the new center and move the point away next to rsto \
+			//TODO add Direction in	
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(newTileset.OffestInToCenter*Vector3.forward);
 			print("move to the new Center"+tempNode);
 			
@@ -180,36 +157,7 @@ public class MapGen : MonoBehaviour {
 	Vector3 rotateAroundPivot(Vector3 Pivot,Vector3 Point,Quaternion RotationAngle){
 		return RotationAngle*(Point-Pivot)+ Pivot;
 	}
-	bool isCollision(RoadSTObject rsto1 , RoadSTObject rsto2){
 
-		Vector3 l1 = rsto1.CurPosition  + rsto1.SizeMin;
-		Vector3 r1 = rsto1.CurPosition  + rsto1.SizeMax;
-		Vector3 l2 = rsto2.CurPosition  + rsto2.SizeMin;
-		Vector3 r2 = rsto2.CurPosition  + rsto2.SizeMax;
-		print(rsto1.RoadName+" "+rsto2.RoadName );
-		print ("L1: "+l1 + " R1: "+r1+" L2: "+l2+" R2: "+r2);
-		// If one rectangle is on left side of other 
-	    if (l1.x > r2.x || l2.x > r1.x) 
-        	return false; 
-  
-    	// If one rectangle is above other 
-	    if (l1.z < r2.z || l2.z < r1.z) 
-        	return false; 
-  
-		return true;
-	}
-
-	bool isCollision(Vector3 l1, Vector3 r1,Vector3 l2 ,Vector3 r2){
-		// If one rectangle is on left side of other 
-	    if (l1.x > r2.x || l2.x > r1.x) 
-        	return false; 
-  
-    	// If one rectangle is above other 
-	    if (l1.z < r2.z || l2.z < r1.z) 
-        	return false; 
-  
-		return true;
-	}
 	bool isCollisionUsingSegments(Vector3 l1, Vector3 r1,Vector3 l2 ,Vector3 r2){
 		Point R1P0 = new Point(l1.x,l1.z);
 		Point R1P1 = new Point(r1.x,l1.z);
@@ -235,6 +183,7 @@ public class MapGen : MonoBehaviour {
 	}
 	public class Point {
 		public float x, y;
+		//isValid = false should be treated as null
 		public bool isValid;
 		public Point (float xx,float yy){
 			x=xx;
@@ -312,46 +261,13 @@ public class MapGen : MonoBehaviour {
 		}
 	}
 
-	/*public bool CheckForOverLaps(Vector2[] shape1, Vector2[] shape2) {
-
-    List<IntPoint> shape1IntPoints = Vector2ArrayToListIntPoint (shape1);
-    List<IntPoint> shape2IntPoints = Vector2ArrayToListIntPoint (shape2);
-
-    List<List<IntPoint>> solution = new List<List<IntPoint>> ();
-
-    c.AddPath (shape1IntPoints, PolyType.ptSubject, true);
-    c.AddPath (shape2IntPoints, PolyType.ptClip, true);
-    c.Execute (ClipType.ctIntersection, solution, PolyFillType.pftNonZero, PolyFillType.pftNonZero);
-    return solution.Count != 0;
-
-	}
-
-	private List<IntPoint> Vector2ArrayToListIntPoint (Vector2[] shape) {
-
-    	List<IntPoint> list = new List<IntPoint> ();
-
-    	foreach (Vector2 v in shape) {
-
-        	list.Add (new IntPoint (v.x, v.y));
-
-    	}
-
-    	return list;
-
-	}*/
+	
 	void ClearMap(){
 		while(GeneratedMap.Count>0){
 			Destroy(((GameObject)GeneratedMap[0]));
 		}
 		GeneratedMap.Clear();
 	}
-	
-
-	/*void initMap(){
-		WorkOnMap = true; 
-		
-		
-	}*/
 	/// <summary>
 	/// Callback to draw gizmos only if the object is selected.
 	/// </summary>

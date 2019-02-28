@@ -22,22 +22,13 @@ public class TrafficManager : MonoBehaviour {
 				Vector3 []TrafficNodesR = tempTileset.TrafficBRNodes;
 				Debug.Log(MiddleTrafficNodes.Count);
 				if(TrafficNodes.Length!= 3){
-					print("traffic nodes is marked as Bezier but the length isn't divisible by 3");
 					return;
 				}else {
-					Debug.Log("b5");
 					for(int j=0;j<TrafficNodes.Length;j+=3){
 						Vector3 p0 =TrafficNodes[j];
 						Vector3 p1 =TrafficNodes[j+1];
 						Vector3 p2 =TrafficNodes[j+2];
 
-						// Vector3 p0l =Quaternion.Euler(new Vector3(0,-90,0))*(Vector3.forward * tempTileset.LengthLeft)+ p0;
-						// Vector3 p1l =Quaternion.Euler(new Vector3(0,-45,0))*(Vector3.forward * tempTileset.LengthLeft)+ p1;
-						// Vector3 p2l =Quaternion.Euler(new Vector3(0,0,0))*(Vector3.forward * tempTileset.LengthLeft)+ p2;
-
-						// Vector3 p0r =Quaternion.Euler(new Vector3(0,90,0))*(Vector3.forward * tempTileset.LengthRight)+ p0;
-						// Vector3 p1r =Quaternion.Euler(new Vector3(0,135,0))*(Vector3.forward * tempTileset.LengthRight)+ p1;
-						// Vector3 p2r =Quaternion.Euler(new Vector3(0,180,0))*(Vector3.forward * tempTileset.LengthRight)+ p2;
 						Vector3 p0l =Quaternion.Euler(TrafficNodesR[j]+new Vector3(0,-90,0))*(Vector3.forward * tempTileset.LengthLeft)+ p0;
 						Vector3 p1l =Quaternion.Euler(TrafficNodesR[j+1]+new Vector3(0,-45,0))*(Vector3.forward * tempTileset.LengthLeft)+ p1;
 						Vector3 p2l =Quaternion.Euler(TrafficNodesR[j+2]+new Vector3(0,0,0))*(Vector3.forward * tempTileset.LengthLeft)+ p2;
@@ -50,7 +41,6 @@ public class TrafficManager : MonoBehaviour {
 						List <Vector3>NodesLeft =BezierArc(p0l,p1l,p2l,tempTileset.NumLerpNodes);
 						List <Vector3>NodesRight =BezierArc(p0r,p1r,p2r,tempTileset.NumLerpNodes);
 						for(int k=0;k<Nodes.Count-1;k++){
-							// if(k==0||k==Nodes.Count-1){
 							Vector3 tempNode = Nodes[k];
 							Vector3 tempMiddleNode = Quaternion.Euler(tempTileset.CurRotation)*tempNode +tempTileset.CurPosition;
 							Vector3	tempRightNode =Quaternion.Euler(tempTileset.CurRotation)*NodesRight[k] +tempTileset.CurPosition;
@@ -58,28 +48,11 @@ public class TrafficManager : MonoBehaviour {
 							RightTrafficNodes.Add(tempRightNode);
 							MiddleTrafficNodes.Add(tempMiddleNode);
 							LeftTrafficNodes.Add(tempLeftNode);
-							// }else{
-							// 	Vector3 tempNode = Nodes[k];
-							// 	Vector3 tempMiddleNode = Quaternion.Euler(tempTileset.CurRotation)*tempNode +tempTileset.CurPosition;
-							// 	Vector3 tempLastMiddleNode =(Vector3) MiddleTrafficNodes[MiddleTrafficNodes.Count-1];
-							// 	tempNode= (tempMiddleNode-(tempLastMiddleNode-tempTileset.CurPosition)).normalized;
-							// 	Vector3 tempRightNode=Quaternion.Euler(new Vector3(0,90,0))*(tempNode * tempTileset.LengthRight)+  (tempLastMiddleNode-tempTileset.CurPosition);
-							// 	tempRightNode =Quaternion.Euler(tempTileset.CurRotation)*tempRightNode +tempTileset.CurPosition;
-							// 	Vector3 tempLeftNode = Quaternion.Euler(new Vector3(0,-90,0))*(tempNode * tempTileset.LengthLeft)+ (tempLastMiddleNode-tempTileset.CurPosition);
-							// 	tempLeftNode=Quaternion.Euler(tempTileset.CurRotation)*tempLeftNode +tempTileset.CurPosition;
-							// 	RightTrafficNodes.Add(tempRightNode);
-							// 	MiddleTrafficNodes.Add(tempMiddleNode);
-							// 	LeftTrafficNodes.Add(tempLeftNode);
-							// }
 						}
 					}
 				}
 			}else{
-				Debug.Log(MiddleTrafficNodes.Count);
-
 				for(int j=0;j<TrafficNodes.Length;j++){
-					//RotateNode
-					Debug.Log(MiddleTrafficNodes.Count);
 					Vector3 tempNode = TrafficNodes[j];
 					Vector3 tempMiddleNode = Quaternion.Euler(tempTileset.CurRotation)*tempNode +tempTileset.CurPosition;
 					Vector3 tempRightNode = Quaternion.Euler(new Vector3(0,90,0))*(Vector3.forward * tempTileset.LengthRight)+tempNode;
@@ -119,13 +92,9 @@ public class TrafficManager : MonoBehaviour {
 		output.z = (1 - t) * (1 - t) * p0.z + 2 * (1 - t) * t * p1.z + t * t * p2.z;
 		return output;
 	}
-	void Update () {
-		
-	}
 	void OnDrawGizmosSelected() {
-		 
-		if(RightTrafficNodes != null){
-			
+
+		if(RightTrafficNodes != null){	
 			for(int i=0;i<RightTrafficNodes.Count;i++){
 				Gizmos.color = Color.yellow;
 				Gizmos.DrawSphere((Vector3)RightTrafficNodes[i]+ new Vector3(0,15,0),3);
@@ -133,7 +102,6 @@ public class TrafficManager : MonoBehaviour {
 		}
 		
 		if(MiddleTrafficNodes != null){
-			
 			for(int i=0;i<MiddleTrafficNodes.Count;i++){
 				Gizmos.color = Color.red;
 				Gizmos.DrawSphere((Vector3)MiddleTrafficNodes[i]+ new Vector3(0,15,0),3);
@@ -141,7 +109,6 @@ public class TrafficManager : MonoBehaviour {
 		}
 		 
 		if(LeftTrafficNodes != null){
-			
 			for(int i=0;i<LeftTrafficNodes.Count;i++){
 				Gizmos.color = Color.blue;
 				Gizmos.DrawSphere((Vector3)LeftTrafficNodes[i]+ new Vector3(0,15,0),3);
