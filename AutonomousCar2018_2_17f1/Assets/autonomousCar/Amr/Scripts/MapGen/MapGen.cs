@@ -37,6 +37,9 @@ public class MapGen : MonoBehaviour {
 	static float EPS = 1E-9f;
 
 	// each map generation object parent should have traffic manager 
+
+
+	//TODO checking TM is null
 	TrafficManager TM ;
 	void Start () {
 		AvailableRoads=new ArrayList();

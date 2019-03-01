@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//TODO documentation 
 public class TrafficManager : MonoBehaviour {
 	private MapGen MG;
 	ArrayList  RightTrafficNodes;
