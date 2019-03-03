@@ -13,11 +13,15 @@ public class SnapCode : MonoBehaviour
     public int resWidth = 1080;
     public int resHight = 1080;
     int snapCounter;
+    int frameCounter = 0;
+    public int snapFrameCounter = 50;
+    int launchCount;
     private List<string[]> rowData = new List<string[]>();
-
+    int counting;
     private void Start()
     {
         snapCounter = 0;
+        counting=0;
     }
 
     private void Awake()
@@ -27,11 +31,25 @@ public class SnapCode : MonoBehaviour
         {
             Snapcam.targetTexture = new RenderTexture(resWidth, resHight, 24);
         }
+        launchCount = PlayerPrefs.GetInt("TimesLaunched", 0);
+
+        // After Grabbing 'TimesLaunched' we increment the value by 1
+        launchCount = launchCount + 1;
+
+        // Set 'TimesLaunched' To The Incremented Value
+        PlayerPrefs.SetInt("TimesLaunched", launchCount);
+
+        // Now I Would Destroy The Script Or Whatever You
+        // Want To Do To Prevent It From Running Multiple
+        // Times In One Launch Session
     }
+
     // Update is called once per frame
 
     void LateUpdate()
     {
+            if (frameCounter >= snapFrameCounter)
+        {
         Texture2D snapshot = new Texture2D(resWidth, resHight, TextureFormat.RGB24, false);
         Snapcam.Render();
         RenderTexture.active = Snapcam.targetTexture;
@@ -40,17 +58,21 @@ public class SnapCode : MonoBehaviour
         string fileName = SnapshotName();
         snapCounter++;
         System.IO.File.WriteAllBytes(fileName, bytes);
-		Save(snapCounter,2);
+		Save(snapCounter,launchCount);
         Debug.Log("Snapshot taken !");
+        }
+        else{
+            frameCounter++;
+        }
 
     }
 
     string SnapshotName()
     {
-        return string.Format("{0}/Snapshots/Session_{1}.png",
+   return string.Format("{0}/Snapshots/Session_{1}_{2}.png",
             Application.dataPath,
+           launchCount,
            snapCounter);
-        // System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")
     }
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -58,11 +80,18 @@ public class SnapCode : MonoBehaviour
 	 void Save(int count,int session){
 
         // Creating First row of titles manually..
+
+        rowData = new List<string[]>();
         string[] rowDataTemp = new string[2];
+
+        if(counting == 0){
+        Debug.Log(counting);
         rowDataTemp[0] = "ID";
         rowDataTemp[1] = "Session";
         rowData.Add(rowDataTemp);
-
+        counting++;
+        }
+        
         // You can add up the values in as many cells as you want.
             rowDataTemp = new string[2];
             rowDataTemp[0] = snapCounter+""; // ID
@@ -76,7 +105,7 @@ public class SnapCode : MonoBehaviour
         }
         Debug.Log(output);
         int     length         = output.GetLength(0);
-        string     delimiter     = ",";
+        string  delimiter     = ",";
 
         StringBuilder sb = new StringBuilder();
         
