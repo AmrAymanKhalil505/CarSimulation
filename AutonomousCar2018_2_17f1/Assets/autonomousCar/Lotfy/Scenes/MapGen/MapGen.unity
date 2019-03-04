@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -210,8 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115dfe7b0938447cbbf9507076f54049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Tracked: {fileID: 0}
-  m_Size: {x: 5000, y: 80, z: 5000}
 --- !u!4 &436897011
 Transform:
   m_ObjectHideFlags: 0
@@ -253,6 +251,95 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &559638309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559638310}
+  - component: {fileID: 559638312}
+  - component: {fileID: 559638311}
+  - component: {fileID: 559638313}
+  m_Layer: 0
+  m_Name: snapshotCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559638310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559638309}
+  m_LocalRotation: {x: 0.26431915, y: 0, z: 0, w: 0.9644353}
+  m_LocalPosition: {x: 0, y: 4.75, z: -7.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1349290918}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 30.653, y: 0, z: 0}
+--- !u!81 &559638311
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559638309}
+  m_Enabled: 0
+--- !u!20 &559638312
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559638309}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: f40cabc1d3082433abf9d96427e1e845, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &559638313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 559638309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d6f4b8030d84b53a54500f67dd92a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755134156
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd00bba40c5356849b2525688439447b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  separations: 0
+  rev: 0
 --- !u!136 &893510148
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -495,3 +584,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1400910149654200, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
     type: 2}
   m_PrefabInternal: {fileID: 55573283}
+--- !u!4 &1349290918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+    type: 2}
+  m_PrefabInternal: {fileID: 55573283}
+--- !u!114 &1349290919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349290913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50499195151484726a8cf9901e9b7982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapCam: {fileID: 559638313}
