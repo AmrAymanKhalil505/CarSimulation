@@ -64,8 +64,9 @@ public class snapshotCamera : MonoBehaviour {
         }
         numericId = numericId + 1;
         String idTag = numericId.ToString();
-        csvContent.AppendLine(idTag +","+ System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+        String dateData = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        csvContent.AppendLine(idTag +","+ dateData);
         File.AppendAllText("Assets/autonomousCar/Lotfy/Snapshots/CSVFile.csv", csvContent.ToString());
-        return string.Format("{0}/autonomousCar/Lotfy/Snapshots/[" + idTag+"] "+ System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png",Application.dataPath);
+        return string.Format("{0}/autonomousCar/Lotfy/Snapshots/[" + idTag+"] "+ dateData + ".png",Application.dataPath);
     }
 }
