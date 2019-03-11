@@ -83,7 +83,7 @@ public class SnapCode : MonoBehaviour
             
 			if (stream.CanWrite) {                 
 	    
-			Stream imageFileStream = File.OpenRead("L:\\Bachelor\\CarSimulation\\AutonomousCar2018_2_17f1\\Assets\\Snapshots\\butterfly.jpg");
+			Stream imageFileStream = File.OpenRead(Application.dataPath +"\\Snapshots\\Session_52_0.png");
             byte[] clientMessageAsByteArray=new byte[imageFileStream.Length];	// Convert string message to byte array.                 
 		    imageFileStream.Read(clientMessageAsByteArray, 0, (int)imageFileStream.Length);
             //	byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage); 				
