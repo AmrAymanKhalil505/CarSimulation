@@ -33,8 +33,8 @@ public class SnapCode : MonoBehaviour
     }
 //---------------------------------------------------------------------------------------------------------------
 	void Update () {         
-		if (Input.GetKeyDown(KeyCode.Space)) {             
-			SendMessage();         
+		if (Input.GetKeyDown(KeyCode.Z)) {             
+			SendMessage(snapCounter-1,launchCount);         
 		}     
 	}  	
 
@@ -73,20 +73,20 @@ public class SnapCode : MonoBehaviour
 	}  	
 
 
-    private void SendMessage() {         
+    private void SendMessage(int count,int launch) {         
 		if (socketConnection == null) {             
 			return;         
 		}  		
 		try { 			
 			// Get a stream object for writing. 			
 			NetworkStream stream = socketConnection.GetStream(); 			
-            
+            Debug.Log(count);
 			if (stream.CanWrite) {                 
 	    
-			Stream imageFileStream = File.OpenRead(Application.dataPath +"\\Snapshots\\Session_52_0.png");
+			Stream imageFileStream = File.OpenRead( "C:/Users/Loai/Desktop/" +"/Snapshots/"+"Session_"+launch+"_"+count+".png");
             byte[] clientMessageAsByteArray=new byte[imageFileStream.Length];	// Convert string message to byte array.                 
 		    imageFileStream.Read(clientMessageAsByteArray, 0, (int)imageFileStream.Length);
-            //	byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage); 				
+                //byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage); 				
 				// Write byte array to socketConnection stream.                 
 				stream.Write(clientMessageAsByteArray, 0, clientMessageAsByteArray.GetLength(0));                 
 				Debug.Log("Client sent his message - should be received by server");             
@@ -130,8 +130,10 @@ public class SnapCode : MonoBehaviour
         byte[] bytes = snapshot.EncodeToPNG();
         string fileName = SnapshotName();
         snapCounter++;
-        System.IO.File.WriteAllBytes(fileName, bytes);
-		Save(snapCounter,launchCount);
+         System.IO.File.WriteAllBytes(fileName, bytes);
+		 //if(snapCounter>2 && snapCounter%10 ==0){
+		// SendMessage(snapCounter-1,launchCount);}
+		 Save(snapCounter,launchCount);
         Debug.Log("Snapshot taken !");
         }
         else{
@@ -143,7 +145,7 @@ public class SnapCode : MonoBehaviour
     string SnapshotName()
     {
    return string.Format("{0}/Snapshots/Session_{1}_{2}.png",
-            Application.dataPath,
+            "C:/Users/Loai/Desktop/",
            launchCount,
            snapCounter);
     }
