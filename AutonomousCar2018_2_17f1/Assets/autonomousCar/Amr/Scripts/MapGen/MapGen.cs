@@ -7,8 +7,11 @@ public class MapGen : MonoBehaviour {
 	[Header("Car Setting")]
 	//Car which RL agent will run on 
 	public GameObject Car;
+	public GameObject AdversialCar;
+
 	//the position will it appear in a the first of the simulation 
 	public Vector3 CarInitPosition;
+	public Vector3 AdversialCarInitPosition;
 
 	[Header ("Roads")]
 	//Roads that will be used to as tilesets
@@ -46,6 +49,7 @@ public class MapGen : MonoBehaviour {
 		GeneratedMap=new ArrayList();
 
 		Car.transform.position = CarInitPosition;
+		AdversialCar.transform.position = AdversialCarInitPosition;
 		AvailableRoads.Add(RoadAhead);
 		AvailableRoads.Add(RoadRight);
 		AvailableRoads.Add(RoadLeft);
