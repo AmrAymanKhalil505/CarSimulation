@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -281,7 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Car: {fileID: 1349290913}
+  AdversialCar: {fileID: 1551150512}
   CarInitPosition: {x: 0, y: 8, z: 0}
+  AdversialCarInitPosition: {x: 0, y: 8, z: 10}
   RoadAhead: {fileID: 11400000, guid: 60acde171f262b8488c81baf623bbb31, type: 2}
   RoadRight: {fileID: 11400000, guid: 4b2fc220eb72d2f42bf3c67073146afe, type: 2}
   RoadLeft: {fileID: 11400000, guid: b436afa6c68b635488fc91939956706f, type: 2}
@@ -500,6 +502,90 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
     type: 2}
   m_PrefabInternal: {fileID: 55573283}
+--- !u!1001 &1551150511
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 85.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400910149654200, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_Name
+      value: AdversialCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 114362702207644474, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116715369779316, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+    - {fileID: 114362702207644474, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+    - {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1 &1551150512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1400910149654200, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1551150511}
+--- !u!114 &1551150514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1551150512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1afb56153f348549729d3898ffa86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1969416600
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c92b46a1235114bb1e75b1502aef11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: /Users/MohamedAshraf/Desktop/
   resWidth: 1080
   resHight: 1080
   snapFrameCounter: 50
