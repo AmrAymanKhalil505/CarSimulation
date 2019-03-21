@@ -656,7 +656,15 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114362702207644474, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+    - {fileID: 114362702207644474, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+    - {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1649301440 stripped
@@ -675,15 +683,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3be86ea432684e6398a49a4c5d560c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1649301442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1649301440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50499195151484726a8cf9901e9b7982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snapCam: {fileID: 0}
