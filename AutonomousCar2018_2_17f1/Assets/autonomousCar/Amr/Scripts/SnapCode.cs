@@ -12,7 +12,7 @@ using System;
 [RequireComponent(typeof(Camera))]
 public class SnapCode : MonoBehaviour
 {
-    public String path;
+    //public String path;
     Camera Snapcam;
     public int resWidth = 1080;
     public int resHight = 1080;
@@ -32,11 +32,11 @@ public class SnapCode : MonoBehaviour
         counting=0;
     }
 //---------------------------------------------------------------------------------------------------------------
-	void Update () {         
-		if (Input.GetKeyDown(KeyCode.Z)) {             
-			SendMessage(snapCounter-1,launchCount);         
-		}     
-	}  	
+	// void Update () {         
+	// 	if (Input.GetKeyDown(KeyCode.Z)) {             
+	// 		SendMessage(snapCounter-1,launchCount);         
+	// 	}     
+	// }  	
 
 	    private void ConnectToTcpServer () { 		
 		try {  			
@@ -83,7 +83,7 @@ public class SnapCode : MonoBehaviour
             Debug.Log(count);
 			if (stream.CanWrite) {                 
 	    
-			Stream imageFileStream = File.OpenRead( path +"/Snapshots/"+"Session_"+launch+"_"+count+".png");
+			Stream imageFileStream = File.OpenRead("C:/Users/Loai/Desktop/Snapshots/"+"Session_"+launch+"_"+count+".png");
             byte[] clientMessageAsByteArray=new byte[imageFileStream.Length];	// Convert string message to byte array.                 
 		    imageFileStream.Read(clientMessageAsByteArray, 0, (int)imageFileStream.Length);
                 //byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage); 				
@@ -131,8 +131,8 @@ public class SnapCode : MonoBehaviour
         string fileName = SnapshotName();
         snapCounter++;
          System.IO.File.WriteAllBytes(fileName, bytes);
-		 //if(snapCounter>2 && snapCounter%10 ==0){
-		// SendMessage(snapCounter-1,launchCount);}
+		 if(snapCounter>2 ){//&& snapCounter%2 ==0){
+		    SendMessage(snapCounter-1,launchCount);}
 		 Save(snapCounter,launchCount);
         Debug.Log("Snapshot taken !");
         }
@@ -145,7 +145,7 @@ public class SnapCode : MonoBehaviour
     string SnapshotName()
     {
    return string.Format("{0}/Snapshots/Session_{1}_{2}.png",
-            path,
+           "C:/Users/Loai/Desktop/",
            launchCount,
            snapCounter);
     }
