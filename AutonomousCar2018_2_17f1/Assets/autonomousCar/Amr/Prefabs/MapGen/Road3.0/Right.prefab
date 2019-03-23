@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33108067924169682}
   - component: {fileID: 23423182799260298}
   - component: {fileID: 114303810805219994}
+  - component: {fileID: 64243833026819068}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -58,6 +59,7 @@ GameObject:
   - component: {fileID: 33186182872202030}
   - component: {fileID: 23966266948118050}
   - component: {fileID: 114125110308919642}
+  - component: {fileID: 65623138157049820}
   m_Layer: 0
   m_Name: Plane (2)
   m_TagString: Untagged
@@ -76,6 +78,7 @@ GameObject:
   - component: {fileID: 33126860392000654}
   - component: {fileID: 23404301586696930}
   - component: {fileID: 114787545953988770}
+  - component: {fileID: 65802481905740978}
   m_Layer: 0
   m_Name: Plane (3)
   m_TagString: Untagged
@@ -320,6 +323,44 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: c0d24bd70a2bbe144a4e826fa3348692, type: 3}
+--- !u!64 &64243833026819068
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027349206140214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0e54e5019631f674c98bff762969988b, type: 3}
+--- !u!65 &65623138157049820
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1412712193964590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.999998, y: 0.0000018894207, z: 10.000001}
+  m_Center: {x: 0.000000031199306, y: -0.0000009536743, z: 0}
+--- !u!65 &65802481905740978
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784645645785726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 0.00000084390194, z: 10}
+  m_Center: {x: 0.000000014901161, y: 0.00000047683716, z: -0.0000009536743}
 --- !u!114 &114125110308919642
 MonoBehaviour:
   m_ObjectHideFlags: 1

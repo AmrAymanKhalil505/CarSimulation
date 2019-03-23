@@ -68,7 +68,7 @@ public class MapGen : MonoBehaviour {
 			}
 		}
 		foldMap();
-		print(NOI);
+		// print(NOI);
 	}
 
 	/*
@@ -104,11 +104,11 @@ public class MapGen : MonoBehaviour {
 			Vector3 tempNode = rsto.CurPosition;
 			//starting a origin moving the center point to the edge
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(rsto.OffestOutToCenter*Vector3.forward);
-			print("move to the edge"+tempNode);
+			// print("move to the edge"+tempNode);
 			//moving from the edge to the new center and move the point away next to rsto \
 			//TODO add Direction in	
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(newTileset.OffestInToCenter*Vector3.forward);
-			print("move to the new Center"+tempNode);
+			// print("move to the new Center"+tempNode);
 			
 			//check collision
 			bool isCol = false;
@@ -139,7 +139,7 @@ public class MapGen : MonoBehaviour {
 			
 		}
 		if(isSuitableRoad){
-				print(((RoadSTObject)GeneratedMap[GeneratedMap.Count-1]).RoadName);
+				// print(((RoadSTObject)GeneratedMap[GeneratedMap.Count-1]).RoadName);
 				return;
 			}else{
 				GeneratedMap.RemoveAt(GeneratedMap.Count-1);

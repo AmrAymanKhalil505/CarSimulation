@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33547242157045784}
   - component: {fileID: 23965654674480782}
   - component: {fileID: 114027350599273486}
+  - component: {fileID: 65373331409533572}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -58,6 +59,7 @@ GameObject:
   - component: {fileID: 33893556734052218}
   - component: {fileID: 23954457748435190}
   - component: {fileID: 114750211011399096}
+  - component: {fileID: 65786069456235056}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -76,6 +78,7 @@ GameObject:
   - component: {fileID: 33600110412536116}
   - component: {fileID: 23800033634850714}
   - component: {fileID: 114723976326687158}
+  - component: {fileID: 65014017899095088}
   m_Layer: 0
   m_Name: Plane (2)
   m_TagString: Untagged
@@ -320,6 +323,42 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: c0d24bd70a2bbe144a4e826fa3348692, type: 3}
+--- !u!65 &65014017899095088
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1711487488802822}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.0000019615982, z: 9.999999}
+  m_Center: {x: 0, y: -0.0000009536743, z: -0.000000030733645}
+--- !u!65 &65373331409533572
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079723838778634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 0.0000019615982, z: 9.999999}
+  m_Center: {x: 0.0000009536743, y: -0.0000009536743, z: -0.000000030500814}
+--- !u!65 &65786069456235056
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377428455339064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 0.0000040605664, z: 9.999998}
+  m_Center: {x: 0, y: -0.0000009536743, z: -0.000000014901161}
 --- !u!114 &114027350599273486
 MonoBehaviour:
   m_ObjectHideFlags: 1

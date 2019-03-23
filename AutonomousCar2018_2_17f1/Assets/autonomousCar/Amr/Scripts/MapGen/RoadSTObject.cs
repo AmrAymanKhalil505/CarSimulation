@@ -32,5 +32,6 @@ public class RoadSTObject : ScriptableObject {
 
 	public Vector3 [] TrafficBNodes;
 	public Vector3 [] TrafficBRNodes;
+	
 
 }
