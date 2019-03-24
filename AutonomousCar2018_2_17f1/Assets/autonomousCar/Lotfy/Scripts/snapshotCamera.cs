@@ -13,8 +13,10 @@ public class snapshotCamera : MonoBehaviour {
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
-    public String path;
+    public String datasetParentPath;
+    public String sessionID;
 
+    private String currentKey;
 
     int resWidth = 1080;
     int resHeight = 1080;
@@ -58,17 +60,37 @@ public class snapshotCamera : MonoBehaviour {
         }
     }
 
+    public void setcurrentKey(String comingValue)
+    {
+        currentKey=comingValue;
+    }
+
     string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file
     {
+
+        //      /Users/MohamedAshraf/Desktop this is my cureent local path
+
+        String sessionPath=datasetParentPath+"/Snapshots/";
+        String csvFilePath=sessionPath+"CSVFile.csv";
+
+        System.IO.Directory.CreateDirectory(datasetParentPath);
+        System.IO.Directory.CreateDirectory(sessionPath);
+
+        
         if(numericId==-1)
         {
-            csvContent.AppendLine("Id,Date");
+            csvContent.AppendLine("SessionId,keyPressed");
         }
         numericId = numericId + 1;
         String idTag = numericId.ToString();
-        String dateData = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-        csvContent.AppendLine(idTag +","+ dateData);
-        File.AppendAllText("Assets/autonomousCar/Lotfy/Snapshots/CSVFile.csv", csvContent.ToString());
-        return string.Format("{0}/autonomousCar/Lotfy/Snapshots/[" + idTag+"] "+ dateData + ".png",Application.dataPath);
+        String imageName="Session_"+sessionID+"_" + idTag ;
+
+
+        csvContent.AppendLine(imageName +","+ currentKey);
+
+        Debug.Log(imageName +","+ currentKey);
+        File.AppendAllText(csvFilePath, csvContent.ToString());
+        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
+         
     }
 }
