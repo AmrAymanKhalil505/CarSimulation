@@ -13,6 +13,8 @@ public class snapshotCamera : MonoBehaviour {
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
+    public String path;
+
 
     int resWidth = 1080;
     int resHeight = 1080;
