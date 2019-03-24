@@ -85,11 +85,11 @@ public class snapshotCamera : MonoBehaviour {
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
 
+         csvContent.AppendLine(imageName +","+ currentKey);
+         File.AppendAllText(csvFilePath, csvContent.ToString());
+         csvContent= new StringBuilder(); // clearng the string builder
 
-        csvContent.AppendLine(imageName +","+ currentKey);
 
-        Debug.Log(imageName +","+ currentKey);
-        File.AppendAllText(csvFilePath, csvContent.ToString());
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
          
     }
