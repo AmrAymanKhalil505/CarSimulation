@@ -8,7 +8,6 @@ using System.IO;
 using System;
 
 	
-
 [RequireComponent(typeof(Camera))]
 public class SnapCode : MonoBehaviour
 {
@@ -25,6 +24,8 @@ public class SnapCode : MonoBehaviour
 		#region private members 	
 	private TcpClient socketConnection; 	
 	private Thread clientReceiveThread; 	
+    private String currentKey;
+
 	#endregion  	
     private void Start()
     {   ConnectToTcpServer();
@@ -37,6 +38,10 @@ public class SnapCode : MonoBehaviour
 	// 		SendMessage(snapCounter-1,launchCount);         
 	// 	}     
 	// }  	
+        public void setcurrentKey(String comingValue)
+            {
+                currentKey=comingValue;
+            }
 
 	    private void ConnectToTcpServer () { 		
 		try {  			
@@ -133,7 +138,7 @@ public class SnapCode : MonoBehaviour
          System.IO.File.WriteAllBytes(fileName, bytes);
 		 if(snapCounter>2 ){//&& snapCounter%2 ==0){
 		    SendMessage(snapCounter-1,launchCount);}
-		 Save(snapCounter,launchCount);
+		 Save(snapCounter,launchCount,currentKey);
         Debug.Log("Snapshot taken !");
         }
         else{
@@ -149,28 +154,39 @@ public class SnapCode : MonoBehaviour
            launchCount,
            snapCounter);
     }
+ void Update(){
+
+
+            foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode))){
+             if(Input.GetKey(vKey)){
+                 setcurrentKey(vKey+"");
+
+             }
+         }
+ }
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-	 void Save(int count,int session){
+	 void Save(int count,int session,String key){
 
         // Creating First row of titles manually..
 
         rowData = new List<string[]>();
         string[] rowDataTemp = new string[2];
 
-        if(counting == 0){
-        Debug.Log(counting);
-        rowDataTemp[0] = "ID";
-        rowDataTemp[1] = "Session";
-        rowData.Add(rowDataTemp);
-        counting++;
+        if( launchCount == 0 && counting == 0){
+                    Debug.Log(counting);
+                    rowDataTemp[0] = "ID";
+                    rowDataTemp[1] = "Session";
+                    rowData.Add(rowDataTemp);
+                    counting++;
         }
         
         // You can add up the values in as many cells as you want.
-            rowDataTemp = new string[2];
+            rowDataTemp = new string[3];
             rowDataTemp[0] = snapCounter+""; // ID
             rowDataTemp[1] = session+""; // ID
+            rowDataTemp[2] = key;
             rowData.Add(rowDataTemp);
 
         string[][] output = new string[rowData.Count][];
