@@ -53,7 +53,7 @@ public class snapshotCamera : MonoBehaviour {
             snapCam.Render();
             RenderTexture.active = snapCam.targetTexture;
             snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-            byte[] bytes = snapShot.EncodeToPNG();
+            byte[] bytes = snapShot.EncodeToJPG();
             string filename = snapShotName();
             System.IO.File.WriteAllBytes(filename,bytes);
             snapCam.gameObject.SetActive(false);
