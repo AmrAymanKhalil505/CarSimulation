@@ -76,11 +76,6 @@ public class snapshotCamera : MonoBehaviour {
         System.IO.Directory.CreateDirectory(datasetParentPath);
         System.IO.Directory.CreateDirectory(sessionPath);
 
-        
-        if(numericId==-1)
-        {
-            csvContent.AppendLine("SessionId,keyPressed");
-        }
         numericId = numericId + 1;
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
