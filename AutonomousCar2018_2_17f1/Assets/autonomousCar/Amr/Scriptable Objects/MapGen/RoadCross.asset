@@ -14,11 +14,11 @@ MonoBehaviour:
   RoadObj: {fileID: 1129397728676970, guid: b9e47265415f05448aeedd77aee9cd22, type: 2}
   RoadName: Cross
   Percentage: 1
-  SizeMin: {x: -28, y: 0, z: -28}
-  SizeMax: {x: 28, y: 0, z: 28}
+  SizeMin: {x: -56, y: 0, z: -56}
+  SizeMax: {x: 56, y: 0, z: 56}
   CorrectPosition: {x: 0, y: 0, z: 0}
-  OffestInToCenter: 30
-  OffestOutToCenter: 30
+  OffestInToCenter: 60
+  OffestOutToCenter: 60
   DirectionIn: {x: 0, y: 0, z: 0}
   DirectionOut: {x: 0, y: 0, z: 0}
   CurPosition: {x: 0, y: 0, z: 0}
@@ -37,5 +37,3 @@ MonoBehaviour:
   LengthLeft: 30
   NumLerpNodes: 3
   isBezierCurve: 0
-  TrafficBNodes: []
-  TrafficBRNodes: []
