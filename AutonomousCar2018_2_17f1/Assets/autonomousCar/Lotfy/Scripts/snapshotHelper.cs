@@ -12,7 +12,7 @@ public class snapshotHelper : MonoBehaviour {
             foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode))){
              if(Input.GetKey(vKey)){
                  string keyName=vKey+"";
-                 if(keyName.CompareTo("UpArrow")==0 || keyName.CompareTo("DownArrow")==0 || keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
+                 if(keyName.CompareTo("UpArrow")==0 ||keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
                  {
                     snapCam.setcurrentKey(vKey+"");
                     snapCam.takeSnapshot();
