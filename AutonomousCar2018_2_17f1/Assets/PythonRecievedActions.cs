@@ -22,7 +22,7 @@ public class PythonRecievedActions : MonoBehaviour
 	{
 		client = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		client.Connect (IP, Port);//connecting port with ip address 
-		dane = System.Text.Encoding.ASCII.GetBytes("l");//decode string  data into byte for sending 
+		dane = System.Text.Encoding.ASCII.GetBytes("f");//decode string  data into byte for sending 
 		client.Send (dane);//send data to port 
 		byte[] b = new byte[1024];
 		int k = client.Receive(b);//recive data from port coming from python script 
