@@ -10,6 +10,7 @@ using System.Text;
 
 public class snapshotCamera : MonoBehaviour {
 
+    private Boolean recording=true;
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
@@ -20,8 +21,18 @@ public class snapshotCamera : MonoBehaviour {
 
     int resWidth = 1080;
     int resHeight = 1080;
-    long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807" 
+    long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
+    private byte[] currentImage; 
+
+    public byte[] getCurrentImage()
+    {
+        return currentImage;
+    }
+
+    public void setRecording(bool flag){
+        recording=flag;
+    }
     private void Awake()
     {
         // The snapshot camera part
@@ -45,17 +56,30 @@ public class snapshotCamera : MonoBehaviour {
         snapCam.gameObject.SetActive(true);
     }
 
+
     void LateUpdate()
     {
-        if(snapCam.gameObject.activeInHierarchy)
+        if(recording)
+        {
+            if(snapCam.gameObject.activeInHierarchy)
+            {
+                Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
+                snapCam.Render();
+                RenderTexture.active = snapCam.targetTexture;
+                snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
+                byte[] bytes = snapShot.EncodeToJPG();
+                string filename = snapShotName();
+                System.IO.File.WriteAllBytes(filename,bytes);
+                snapCam.gameObject.SetActive(false);
+            }
+        }
+        else
         {
             Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
             snapCam.Render();
             RenderTexture.active = snapCam.targetTexture;
             snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-            byte[] bytes = snapShot.EncodeToJPG();
-            string filename = snapShotName();
-            System.IO.File.WriteAllBytes(filename,bytes);
+            currentImage = snapShot.EncodeToJPG();
             snapCam.gameObject.SetActive(false);
         }
     }

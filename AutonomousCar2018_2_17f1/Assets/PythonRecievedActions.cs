@@ -18,12 +18,21 @@ public class PythonRecievedActions : MonoBehaviour
 
 	private CarController m_Car; // the car controller we want to use
 
+	public snapshotCamera snapCam; 
+
+	private byte[] currentImage;
+
 	public void Changing()
 	{
 		client = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		client.Connect (IP, Port);//connecting port with ip address 
-		dane = System.Text.Encoding.ASCII.GetBytes("f");//decode string  data into byte for sending 
-		client.Send (dane);//send data to port 
+
+		snapCam.gameObject.SetActive(true);
+		currentImage=snapCam.getCurrentImage();
+		//dane = System.Byte.GetBytes(currentImage);//decode string  data into byte for sending 
+		client.Send (currentImage);//send data to port 
+
+
 		byte[] b = new byte[1024];
 		int k = client.Receive(b);//recive data from port coming from python script 
 		string szReceived = System.Text.Encoding.ASCII.GetString(b, 0, k);//coming data is in bytes converting into string 
@@ -57,6 +66,7 @@ public class PythonRecievedActions : MonoBehaviour
 	void Start ( )
 	{
 		m_Car = GetComponent<CarController>();
+		snapCam.setRecording(false);
 	}
 
 	void Update ()
