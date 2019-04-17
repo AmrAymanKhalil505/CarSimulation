@@ -14,7 +14,7 @@ public class PythonRecievedActions : MonoBehaviour
 	public int Port = 1234;
 	//public byte[] dane;
 	public Socket client;
-	int WaitForCarToLand=30;
+	int WaitForCarToLand=20;
 
 	private CarController m_Car; // the car controller we want to use
 
@@ -33,18 +33,22 @@ public class PythonRecievedActions : MonoBehaviour
 			// which direction will we move the car in, f--> foreward , b--> backward , r--> right , l--> left
 			switch (words[0]) 
       		{
-				case "f":
+				case "2":
 					m_Car.Move(0f, 1.0f, 1.0f, 0f);
 					break;
 				case "b":
 					m_Car.Move(0f, -1.0f, -1.0f, 0f);
 					break;
-				case "r":
+				case "1":
 					m_Car.Move(1.0f, 0f, 0f, 0f);
 					break;
-				case "l":
+				case "0":
 					m_Car.Move(-1.0f, 0f, 0f, 0f);
 					break;
+				case "3":
+					m_Car.Move(0f, 0.0f, 0.0f, 0f);
+					break;
+
       		}
 		} 
 		else

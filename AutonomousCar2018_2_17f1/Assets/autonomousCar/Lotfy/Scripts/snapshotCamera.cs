@@ -21,7 +21,7 @@ public class snapshotCamera : MonoBehaviour {
 
     int resWidth = 1080;
     int resHeight = 1080;
-    int frameCounter=10;
+    int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
     private byte[] currentImage; 
@@ -93,7 +93,7 @@ public class snapshotCamera : MonoBehaviour {
                 byte[] bytes = snapShot.EncodeToJPG();
                 string filename = snapShotNameSelfDriving();
                 System.IO.File.WriteAllBytes(filename,bytes);
-                frameCounter=20;
+                frameCounter=2;
                 Debug.Log("SnapshotTaken");
             }
         }
