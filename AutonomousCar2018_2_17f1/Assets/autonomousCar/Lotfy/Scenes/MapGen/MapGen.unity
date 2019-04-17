@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d6f4b8030d84b53a54500f67dd92a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recording: 0
   datasetParentPath: /Users/MohamedAshraf/Desktop
   sessionID: 70
 --- !u!1 &755134156
@@ -634,8 +635,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
   Port: 1234
-  dane: 
-  snapCam: {fileID: 559638313}
 --- !u!4 &1349290918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6,

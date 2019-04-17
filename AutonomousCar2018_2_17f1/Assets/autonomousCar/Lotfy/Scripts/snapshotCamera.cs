@@ -10,7 +10,7 @@ using System.Text;
 
 public class snapshotCamera : MonoBehaviour {
 
-    private Boolean recording=true;
+    public Boolean recording;
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
@@ -21,6 +21,7 @@ public class snapshotCamera : MonoBehaviour {
 
     int resWidth = 1080;
     int resHeight = 1080;
+    int frameCounter=10;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
     private byte[] currentImage; 
@@ -47,7 +48,15 @@ public class snapshotCamera : MonoBehaviour {
             resWidth = snapCam.targetTexture.width;
             resWidth = snapCam.targetTexture.height;
         }
-        snapCam.gameObject.SetActive(false);
+        if(recording)
+        {
+            snapCam.gameObject.SetActive(false);
+        }
+        else
+        {
+            snapCam.gameObject.SetActive(true);
+        }
+        
 
     }
 
@@ -75,18 +84,31 @@ public class snapshotCamera : MonoBehaviour {
         }
         else
         {
-            Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
-            snapCam.Render();
-            RenderTexture.active = snapCam.targetTexture;
-            snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-            currentImage = snapShot.EncodeToJPG();
-            snapCam.gameObject.SetActive(false);
+            if(--frameCounter<=0)
+            {
+                Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
+                snapCam.Render();
+                RenderTexture.active = snapCam.targetTexture;
+                snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
+                byte[] bytes = snapShot.EncodeToJPG();
+                string filename = snapShotNameSelfDriving();
+                System.IO.File.WriteAllBytes(filename,bytes);
+                frameCounter=20;
+                Debug.Log("SnapshotTaken");
+            }
         }
     }
 
     public void setcurrentKey(String comingValue)
     {
         currentKey=comingValue;
+    }
+
+    string snapShotNameSelfDriving(){
+        String sessionPath=datasetParentPath+"/sharedMemory/";
+        String imageName=(++numericId).ToString();
+        System.IO.Directory.CreateDirectory(sessionPath);
+        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
     }
 
     string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file

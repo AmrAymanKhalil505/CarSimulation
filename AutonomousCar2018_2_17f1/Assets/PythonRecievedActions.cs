@@ -7,31 +7,21 @@ using System.Linq;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
-    [RequireComponent(typeof (CarController))]
+[RequireComponent(typeof (CarController))]
 public class PythonRecievedActions : MonoBehaviour
 {
 	public string IP = "127.0.0.1"; 
 	public int Port = 1234;
-	public byte[] dane;
+	//public byte[] dane;
 	public Socket client;
 	int WaitForCarToLand=30;
 
 	private CarController m_Car; // the car controller we want to use
 
-	public snapshotCamera snapCam; 
-
-	private byte[] currentImage;
-
 	public void Changing()
 	{
 		client = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		client.Connect (IP, Port);//connecting port with ip address 
-
-		snapCam.gameObject.SetActive(true);
-		currentImage=snapCam.getCurrentImage();
-		//dane = System.Byte.GetBytes(currentImage);//decode string  data into byte for sending 
-		client.Send (currentImage);//send data to port 
-
 
 		byte[] b = new byte[1024];
 		int k = client.Receive(b);//recive data from port coming from python script 
@@ -66,7 +56,6 @@ public class PythonRecievedActions : MonoBehaviour
 	void Start ( )
 	{
 		m_Car = GetComponent<CarController>();
-		snapCam.setRecording(false);
 	}
 
 	void Update ()
