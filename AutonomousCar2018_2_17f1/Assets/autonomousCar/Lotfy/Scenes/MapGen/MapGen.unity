@@ -395,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recording: 0
+  saveInSharedMemory: 0
   currentTakenAction: 
   datasetParentPath: /Users/MohamedAshraf/Desktop
   sessionID: 70
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recording: 1
+  saveInSharedMemory: 0
   currentTakenAction: up
   datasetParentPath: /Users/MohamedAshraf/Desktop
   sessionID: 100

@@ -12,6 +12,8 @@ public class snapshotCamera : MonoBehaviour {
 
     public Boolean recording;
 
+    public Boolean saveInSharedMemory;
+
     public String currentTakenAction;
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
@@ -86,8 +88,10 @@ public class snapshotCamera : MonoBehaviour {
         }
         else
         {
-            if(--frameCounter<=0)
+            if(saveInSharedMemory)
             {
+                if(--frameCounter<=0)
+                {
                 Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
@@ -97,6 +101,7 @@ public class snapshotCamera : MonoBehaviour {
                 System.IO.File.WriteAllBytes(filename,bytes);
                 frameCounter=2;
                 Debug.Log("SnapshotTaken");
+                }
             }
         }
     }
