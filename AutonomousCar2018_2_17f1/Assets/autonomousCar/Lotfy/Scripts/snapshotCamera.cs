@@ -11,6 +11,8 @@ using System.Text;
 public class snapshotCamera : MonoBehaviour {
 
     public Boolean recording;
+
+    public String currentTakenAction;
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
@@ -116,8 +118,8 @@ public class snapshotCamera : MonoBehaviour {
 
         //      /Users/MohamedAshraf/Desktop this is my cureent local path
 
-        String sessionPath=datasetParentPath+"/testing/right/";
-        String csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
+        String sessionPath=datasetParentPath+"/data/"+currentTakenAction;
+        //String csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
 
         System.IO.Directory.CreateDirectory(datasetParentPath);
         System.IO.Directory.CreateDirectory(sessionPath);
@@ -126,14 +128,14 @@ public class snapshotCamera : MonoBehaviour {
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
 
-        Debug.Log(currentKey+"");
+        //Debug.Log(currentKey+"");
 
-         csvContent.AppendLine(imageName +","+ currentKey);
-         File.AppendAllText(csvFilePath, csvContent.ToString());
-         csvContent= new StringBuilder(); // clearng the string builder
+         //csvContent.AppendLine(imageName +","+ currentKey);
+         //File.AppendAllText(csvFilePath, csvContent.ToString());
+         //csvContent= new StringBuilder(); // clearng the string builder
 
 
-        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
+        return string.Format(sessionPath+"/"+imageName+ ".png",Application.dataPath);
          
     }
 }
