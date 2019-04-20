@@ -15,6 +15,7 @@ public class PythonRecievedActions : MonoBehaviour
 	//public byte[] dane;
 	public Socket client;
 	int WaitForCarToLand=20;
+	public bool HalfSpeed;
 
 	private CarController m_Car; // the car controller we want to use
 
@@ -34,16 +35,44 @@ public class PythonRecievedActions : MonoBehaviour
 			switch (words[0]) 
       		{
 				case "2":
-					m_Car.Move(0f, 1.0f, 1.0f, 0f);
+					if(HalfSpeed)
+					{
+						m_Car.Move(0f, 0.5f, 0.5f, 0f);
+					}
+					else
+					{
+						m_Car.Move(0f, 0.8f, 0.8f, 0f);
+					}	
 					break;
 				case "b":
-					m_Car.Move(0f, -1.0f, -1.0f, 0f);
+					if(HalfSpeed)
+					{
+						m_Car.Move(0f, -0.4f, -0.4f, 0f);
+					}
+					else
+					{
+						m_Car.Move(0f, -0.8f, -0.8f, 0f);
+					}
 					break;
 				case "1":
-					m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
+					if(HalfSpeed)
+					{
+						m_Car.Move(0.4f, 0.2f, 0.2f, 0f);
+					}
+					else
+					{
+						m_Car.Move(0.8f, 0.4f, 0.4f, 0f);
+					}
 					break;
 				case "0":
-					m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
+					if(HalfSpeed)
+					{
+						m_Car.Move(-0.4f, 0.2f, 0.2f, 0f);
+					}
+					else
+					{
+						m_Car.Move(-0.8f, 0.4f, 0.4f, 0f);
+					}
 					break;
 				case "3":
 					m_Car.Move(0f, 0.0f, 0.0f, 0f);

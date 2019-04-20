@@ -197,7 +197,7 @@ Prefab:
     - target: {fileID: 114362702207644474, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 81229070070465342, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
@@ -395,7 +395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recording: 0
-  saveInSharedMemory: 0
+  sharedMemory2: 0
+  saveInSharedMemory: 1
   currentTakenAction: 
   datasetParentPath: /Users/MohamedAshraf/Desktop
   sessionID: 
@@ -428,8 +429,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d6f4b8030d84b53a54500f67dd92a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recording: 1
-  saveInSharedMemory: 0
+  recording: 0
+  sharedMemory2: 1
+  saveInSharedMemory: 1
   currentTakenAction: up
   datasetParentPath: /Users/MohamedAshraf/Desktop
   sessionID: 272
@@ -528,7 +530,7 @@ MonoBehaviour:
   RoadRight: {fileID: 11400000, guid: 4b2fc220eb72d2f42bf3c67073146afe, type: 2}
   RoadLeft: {fileID: 11400000, guid: b436afa6c68b635488fc91939956706f, type: 2}
   RoadCross: {fileID: 11400000, guid: c6fb34962ffb57d4a9ae39ce6bf8d8f0, type: 2}
-  GeneratedMapLen: 50
+  GeneratedMapLen: 30
   MapStart: {x: -500, y: 0, z: -500}
   MapEnd: {x: 500, y: 0, z: 500}
 --- !u!4 &755134158
@@ -743,13 +745,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1349290913}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c60811a8da08455489aa11875d05544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
-  Port: 1235
+  Port: 2002
+  HalfSpeed: 1
 --- !u!4 &1349290918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
@@ -776,7 +779,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.y
@@ -809,7 +812,7 @@ Prefab:
     - target: {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4714960871855366, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalRotation.x
@@ -939,10 +942,11 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835950771}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c60811a8da08455489aa11875d05544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
-  Port: 1126
+  Port: 2102
+  HalfSpeed: 0

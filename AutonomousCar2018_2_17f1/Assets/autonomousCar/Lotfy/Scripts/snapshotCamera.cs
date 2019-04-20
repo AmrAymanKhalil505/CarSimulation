@@ -11,6 +11,7 @@ using System.Text;
 public class snapshotCamera : MonoBehaviour {
 
     public Boolean recording;
+    public Boolean sharedMemory2;
 
     public Boolean saveInSharedMemory;
 
@@ -112,7 +113,15 @@ public class snapshotCamera : MonoBehaviour {
     }
 
     string snapShotNameSelfDriving(){
-        String sessionPath=datasetParentPath+"/sharedMemory/";
+        String sessionPath;
+        if(sharedMemory2)
+        {
+             sessionPath=datasetParentPath+"/sharedMemory2/";
+        }
+        else
+        {
+             sessionPath=datasetParentPath+"/sharedMemory/";
+        }
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
