@@ -123,7 +123,7 @@ public class snapshotCamera : MonoBehaviour {
 
         //      /Users/MohamedAshraf/Desktop this is my cureent local path
 
-        String sessionPath=datasetParentPath+"/data/"+currentTakenAction;
+        String sessionPath=datasetParentPath+"/validation/"+currentTakenAction;
         //String csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
 
         System.IO.Directory.CreateDirectory(datasetParentPath);

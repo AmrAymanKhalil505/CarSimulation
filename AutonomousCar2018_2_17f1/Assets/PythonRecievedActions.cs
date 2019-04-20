@@ -40,10 +40,10 @@ public class PythonRecievedActions : MonoBehaviour
 					m_Car.Move(0f, -1.0f, -1.0f, 0f);
 					break;
 				case "1":
-					m_Car.Move(1.0f, 0f, 0f, 0f);
+					m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
 					break;
 				case "0":
-					m_Car.Move(-1.0f, 0f, 0f, 0f);
+					m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
 					break;
 				case "3":
 					m_Car.Move(0f, 0.0f, 0.0f, 0f);
