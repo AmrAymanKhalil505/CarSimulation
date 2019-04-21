@@ -7,11 +7,8 @@ public class MapGen : MonoBehaviour {
 	[Header("Car Setting")]
 	//Car which RL agent will run on 
 	public GameObject Car;
-	
-
 	//the position will it appear in a the first of the simulation 
 	public Vector3 CarInitPosition;
-	
 
 	[Header ("Roads")]
 	//Roads that will be used to as tilesets
@@ -41,23 +38,38 @@ public class MapGen : MonoBehaviour {
 
 	// each map generation object parent should have traffic manager 
 
+    public bool activeDynamicObs;
+    public bool activeStaticObs;
 
+     public bool activeTraffic;
 	//TODO checking TM is null
 	TrafficManager TM ;
+	//DynamicObstacle DO ;
+	ObstacleManager OM;
 	void Start () {
 		AvailableRoads=new ArrayList();
 		GeneratedMap=new ArrayList();
 
 		Car.transform.position = CarInitPosition;
-		
 		AvailableRoads.Add(RoadAhead);
 		AvailableRoads.Add(RoadRight);
 		AvailableRoads.Add(RoadLeft);
 		AvailableRoads.Add(RoadCross);
 		// TODO handle Null TM 
-		TM= GetComponent<TrafficManager>();
+		//DO= GetComponent<DynamicObstacle>();
+		OM = GetComponent<ObstacleManager>();
+		TM = GetComponent<TrafficManager>();
 		CreateMap();
+		if(activeTraffic){
+	    
 		TM.initNodes();
+
+
+		}
+
+
+        OM.initObstacles(activeStaticObs,activeDynamicObs);
+
 
 	}
 	
@@ -72,7 +84,7 @@ public class MapGen : MonoBehaviour {
 			}
 		}
 		foldMap();
-		print(NOI);
+		// print(NOI);
 	}
 
 	/*
@@ -108,11 +120,11 @@ public class MapGen : MonoBehaviour {
 			Vector3 tempNode = rsto.CurPosition;
 			//starting a origin moving the center point to the edge
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(rsto.OffestOutToCenter*Vector3.forward);
-			print("move to the edge"+tempNode);
+			// print("move to the edge"+tempNode);
 			//moving from the edge to the new center and move the point away next to rsto \
 			//TODO add Direction in	
 			tempNode+= Quaternion.Euler(rsto.DirectionOut+rsto.CurRotation)*(newTileset.OffestInToCenter*Vector3.forward);
-			print("move to the new Center"+tempNode);
+			// print("move to the new Center"+tempNode);
 			
 			//check collision
 			bool isCol = false;
@@ -143,7 +155,7 @@ public class MapGen : MonoBehaviour {
 			
 		}
 		if(isSuitableRoad){
-				print(((RoadSTObject)GeneratedMap[GeneratedMap.Count-1]).RoadName);
+				// print(((RoadSTObject)GeneratedMap[GeneratedMap.Count-1]).RoadName);
 				return;
 			}else{
 				GeneratedMap.RemoveAt(GeneratedMap.Count-1);

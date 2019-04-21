@@ -15,9 +15,8 @@ public class PythonRecievedActions : MonoBehaviour
 	//public byte[] dane;
 	public Socket client;
 	int WaitForCarToLand=20;
-	public bool HalfSpeed;
 
-	private CarController m_Car; // the car controller we want to use
+	public CarController m_Car; // the car controller we want to use
 
 	public void Changing()
 	{
@@ -29,55 +28,32 @@ public class PythonRecievedActions : MonoBehaviour
 		string szReceived = System.Text.Encoding.ASCII.GetString(b, 0, k);//coming data is in bytes converting into string 
 
 		if (client.Connected)
-		{
+		{   //Debug.Log(szReceived);
 			string[] words = szReceived.Split(' ');//split data into string data is in 2.2 3.3 4.0
+			Debug.Log(words[0]);
 			// which direction will we move the car in, f--> foreward , b--> backward , r--> right , l--> left
 			switch (words[0]) 
       		{
 				case "2":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0f, 0.5f, 0.5f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0f, 0.8f, 0.8f, 0f);
-					}	
+				    Debug.Log("right");
+				    m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
 					break;
 				case "b":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0f, -0.4f, -0.4f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0f, -0.8f, -0.8f, 0f);
-					}
+					m_Car.Move(0f, -1.0f, -1.0f, 0f);
 					break;
 				case "1":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0.4f, 0.2f, 0.2f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0.8f, 0.4f, 0.4f, 0f);
-					}
+			    	Debug.Log("left");
+					m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
 					break;
 				case "0":
-					if(HalfSpeed)
-					{
-						m_Car.Move(-0.4f, 0.2f, 0.2f, 0f);
-					}
-					else
-					{
-						m_Car.Move(-0.8f, 0.4f, 0.4f, 0f);
-					}
+				    Debug.Log("brake");
+					m_Car.Move(0f, -1.0f, -1.0f, 0f);
 					break;
-				case "3":
-					m_Car.Move(0f, 0.0f, 0.0f, 0f);
+				case "3":{
+				    Debug.Log("forward");
+					m_Car.Move(0f, 1.0f, 1.0f, 0f);
 					break;
-
+				}
       		}
 		} 
 		else
@@ -88,7 +64,7 @@ public class PythonRecievedActions : MonoBehaviour
 	}
 	void Start ( )
 	{
-		m_Car = GetComponent<CarController>();
+		//m_Car = GetComponent<CarController>();
 	}
 
 	void Update ()

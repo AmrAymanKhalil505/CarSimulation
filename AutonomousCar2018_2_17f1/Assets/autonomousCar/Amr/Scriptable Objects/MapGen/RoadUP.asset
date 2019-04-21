@@ -31,11 +31,39 @@ MonoBehaviour:
   - Left
   - Cross
   TrafficNodes:
-  - {x: 0, y: 0, z: -60}
-  - {x: 0, y: 0, z: 60}
-  LengthRight: 30
-  LengthLeft: 30
+  - {x: 0, y: 0, z: -30}
+  - {x: 0, y: 0, z: 30}
+  LengthRight: 15
+  LengthLeft: 15
   NumLerpNodes: 3
   isBezierCurve: 0
   TrafficBNodes: []
   TrafficBRNodes: []
+  obstacles:
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 117212, guid: cd245e07bc37d3e43b84d3e2005e68cc, type: 2}
+  - {fileID: 117212, guid: cd245e07bc37d3e43b84d3e2005e68cc, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  pointsX:
+  - {x: 0, y: 0, z: 31}
+  - {x: -14.2, y: 0, z: 29}
+  - {x: -14.2, y: 0, z: 29}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  pointsY:
+  - {x: 0, y: 0, z: -31}
+  - {x: 11, y: 0, z: -31}
+  - {x: 11, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  count: 

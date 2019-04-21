@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: RoadCross
   m_EditorClassIdentifier: Assembly-CSharp::RoadSTObject
-  RoadObj: {fileID: 1463424688480794, guid: 3af937b09668347d79f07ed7ccd4703b, type: 2}
+  RoadObj: {fileID: 1513380495402450, guid: df4495c1816e049b2b073fd50de6e321, type: 2}
   RoadName: Cross
   Percentage: 1
   SizeMin: {x: -28, y: 0, z: -28}
@@ -31,11 +31,45 @@ MonoBehaviour:
   - Left
   - Right
   TrafficNodes:
-  - {x: 0, y: 0, z: -60}
-  - {x: 0, y: 0, z: 60}
-  LengthRight: 30
-  LengthLeft: 30
+  - {x: 0, y: 0, z: -30}
+  - {x: 0, y: 0, z: 30}
+  LengthRight: 15
+  LengthLeft: 15
   NumLerpNodes: 3
   isBezierCurve: 0
   TrafficBNodes: []
   TrafficBRNodes: []
+  obstacles:
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 1977796281193266, guid: c03d7a141f014664fa3e50871bc681a8, type: 2}
+  - {fileID: 117212, guid: cd245e07bc37d3e43b84d3e2005e68cc, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 112160, guid: e61b9fbbe59247348b7c2ba6f0b6e785, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  - {fileID: 129800, guid: 1d3b1a1513de66247974634911345b98, type: 2}
+  pointsX:
+  - {x: 15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: -15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: 5, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  - {x: 15, y: 0, z: -15}
+  pointsY:
+  - {x: 10, y: 0, z: -30}
+  - {x: 10, y: 0, z: -30}
+  - {x: -5, y: 0, z: 0}
+  - {x: 12, y: 0, z: 18}
+  - {x: 5, y: 0, z: 18}
+  - {x: 5, y: 0, z: 18}
+  - {x: 5, y: 0, z: 18}
+  - {x: 12, y: 0, z: 18}
+  - {x: 5, y: 0, z: 18}
+  - {x: 5, y: 0, z: 18}
+  count: 

@@ -6,7 +6,7 @@ public class EmptyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		//fady 0
 	}
 	
 	// Update is called once per frame

@@ -31,18 +31,22 @@ MonoBehaviour:
   - Left
   - Right
   TrafficNodes:
-  - {x: 0, y: 0, z: -60}
+  - {x: 0, y: 0, z: -30}
   - {x: 0, y: 0, z: 0}
-  - {x: -60, y: 0, z: 0}
-  LengthRight: 30
-  LengthLeft: 30
+  - {x: -30, y: 0, z: 0}
+  LengthRight: 15
+  LengthLeft: 15
   NumLerpNodes: 5
   isBezierCurve: 1
   TrafficBNodes:
-  - {x: 0, y: 0, z: -60}
+  - {x: 0, y: 0, z: -30}
   - {x: 0, y: 0, z: 0}
-  - {x: -60, y: 0, z: 0}
+  - {x: -30, y: 0, z: 0}
   TrafficBRNodes:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: -90, z: 0}
   - {x: 0, y: -180, z: 0}
+  obstacles: []
+  pointsX: []
+  pointsY: []
+  count: 

@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 //TODO documentation 
 public class TrafficManager : MonoBehaviour {
+
+	[Header("Map Nodes")]
 	private MapGen MG;
-	ArrayList  RightTrafficNodes;
-	ArrayList  MiddleTrafficNodes;
-	ArrayList  LeftTrafficNodes;
+	public ArrayList  RightTrafficNodes;
+	public ArrayList  MiddleTrafficNodes;
+	public ArrayList  LeftTrafficNodes;
+
+	[Header("Traffic Cars")]
+	public GameObject TrafficCar;
+	public int NumberOfCarsNotRev;
+	public int NumberOfCarsRev;
+	public Vector3 offestToNodesSpwan;
+	public int separations;
+
 	public void initNodes(){
 		RightTrafficNodes=new ArrayList();
 		MiddleTrafficNodes=new ArrayList();
@@ -75,6 +85,7 @@ public class TrafficManager : MonoBehaviour {
 				}
 			}
 		}
+		spawnTrafficCars();
 	}
 	List <Vector3> BezierArc(Vector3 p0,Vector3 p1,Vector3 p2,int NumLerpNodes){
 		List <Vector3> output = new List<Vector3> ();
@@ -116,4 +127,37 @@ public class TrafficManager : MonoBehaviour {
 		}
 		
 	}
+	void SpawntrafficCars(int place,bool isRev)
+	{	
+		Vector3 spawnPlace = Vector3.Lerp ((Vector3) MiddleTrafficNodes [place],(Vector3) RightTrafficNodes [place], Random.Range (0, 1)) +offestToNodesSpwan;
+	   
+		GameObject car = Instantiate(TrafficCar,spawnPlace, Quaternion.Euler(0,180,0)) as GameObject;
+		car.GetComponent<CarFollowNodes> ().MiddleTrafficNodes = MiddleTrafficNodes; 
+		car.GetComponent<CarFollowNodes> ().LeftTrafficNodes = LeftTrafficNodes;
+		car.GetComponent<CarFollowNodes> ().RightTrafficNodes = RightTrafficNodes;
+		car.GetComponent<CarFollowNodes> ().separations = separations;
+		car.GetComponent<CarFollowNodes> ().Rev = isRev;
+		car.GetComponent<CarFollowNodes> ().CurrectNodeIndex = place;
+	}
+	void spawnTrafficCars(){
+		int totalNumberNodes = MiddleTrafficNodes.Count-1;
+		if(NumberOfCarsNotRev == 0){
+			return;
+		}
+		int step = totalNumberNodes/NumberOfCarsNotRev;
+		for (int i=1;i<totalNumberNodes;i+=step){
+			SpawntrafficCars(i,false);
+		}
+	}
+	void spawnTrafficCarsRev(){
+		int totalNumberNodes = MiddleTrafficNodes.Count-1;
+		if(NumberOfCarsRev == 0){
+			return;
+		}
+		int step = totalNumberNodes/NumberOfCarsNotRev;
+		for (int i=1;i<totalNumberNodes;i+=step){
+			SpawntrafficCars(i,true);
+		}
+	}
+
 }

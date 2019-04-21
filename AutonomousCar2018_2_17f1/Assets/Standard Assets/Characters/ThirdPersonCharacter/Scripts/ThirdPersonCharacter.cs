@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(Animator))]
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
+	
 		[SerializeField] float m_MovingTurnSpeed = 360;
 		[SerializeField] float m_StationaryTurnSpeed = 180;
 		[SerializeField] float m_JumpPower = 12f;
@@ -29,6 +30,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+        bool accident;
 
 		void Start()
 		{
@@ -37,16 +39,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
-
+			m_IsGrounded = true;
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
 
 		public void Move(Vector3 move, bool crouch, bool jump)
-		{
-
-			// convert the world relative moveInput vector into a local-relative
+		{ 
+	    	// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
 			if (move.magnitude > 1f) move.Normalize();
@@ -55,7 +56,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
-
+			// Debug.Log(crouch);
+			// Debug.Log(jump);
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:
@@ -64,7 +66,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				HandleGroundedMovement(crouch, jump);
 			}
 			else
-			{
+			{  // Debug.Log("man");
 				HandleAirborneMovement();
 			}
 
@@ -75,7 +77,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			UpdateAnimator(move);
 		}
 
+		// void OnCollisionEnter(Collision collision)
+        //   {
+        //  Debug.Log(collision.gameObject.tag);
+        //  if(collision.gameObject.tag=="Player"){
+        //        // accident = true;
+        //       // Destroy(gameObject);
+		// 	  Debug.Log("boy");
+  
 
+        // }
+        // }
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
 			if (m_IsGrounded && crouch)
@@ -113,7 +125,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				}
 			}
 		}
+       public void logAccident(bool acc){
 
+          accident = acc;
+
+	   }
 
 		void UpdateAnimator(Vector3 move)
 		{
@@ -121,7 +137,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
-			m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetBool("OnGround", true);
+            m_Animator.SetBool("DeathTrigger", accident);
+          
+         //  Debug.Log(m_Rigidbody.velocity.y);
+		//    Debug.Log("accident value "+ accident);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -202,10 +222,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void CheckGroundStatus()
 		{
 			RaycastHit hitInfo;
-#if UNITY_EDITOR
+			#if UNITY_EDITOR
 			// helper to visualise the ground check ray in the scene view
 			Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
-#endif
+			#endif
 			// 0.1f is a small offset to start the ray from inside the character
 			// it is also good to note that the transform position in the sample assets is at the base of the character
 			if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))

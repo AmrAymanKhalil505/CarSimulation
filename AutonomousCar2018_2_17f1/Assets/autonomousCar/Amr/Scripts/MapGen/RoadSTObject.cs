@@ -22,7 +22,7 @@ public class RoadSTObject : ScriptableObject {
 
 	public Vector3 initPosition;
 	public Vector3 initRotation;
-	public  string [] SuitableNextTileSet;
+	public string [] SuitableNextTileSet;
 
 	public Vector3 [] TrafficNodes;
 	public float LengthRight;
@@ -32,5 +32,11 @@ public class RoadSTObject : ScriptableObject {
 
 	public Vector3 [] TrafficBNodes;
 	public Vector3 [] TrafficBRNodes;
+
+	public GameObject [] obstacles;
+	public Vector3[] pointsX;
+	public Vector3[] pointsY;
+    public int[] count; 
+	
 
 }
