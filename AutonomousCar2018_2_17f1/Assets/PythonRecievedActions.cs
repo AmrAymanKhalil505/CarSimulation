@@ -30,49 +30,24 @@ public class PythonRecievedActions : MonoBehaviour
 
 		if (client.Connected)
 		{
+			float temp = 1;
+			if(HalfSpeed)
+			{
+				temp=0.5f;
+			}
 			string[] words = szReceived.Split(' ');//split data into string data is in 2.2 3.3 4.0
-			// which direction will we move the car in, f--> foreward , b--> backward , r--> right , l--> left
+			// which direction will we move the car in, 2--> foreward , 1--> right , 0--> left
 			switch (words[0]) 
       		{
+				
 				case "2":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0f, 0.5f, 0.5f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0f, 0.8f, 0.8f, 0f);
-					}	
-					break;
-				case "b":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0f, -0.4f, -0.4f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0f, -0.8f, -0.8f, 0f);
-					}
+						m_Car.Move(0f, temp*0.8f, temp*0.8f, 0f);	
 					break;
 				case "1":
-					if(HalfSpeed)
-					{
-						m_Car.Move(0.4f, 0.2f, 0.2f, 0f);
-					}
-					else
-					{
-						m_Car.Move(0.8f, 0.4f, 0.4f, 0f);
-					}
+						m_Car.Move(temp*(0.8f), temp*(0.4f),temp*(0.4f), 0f);
 					break;
 				case "0":
-					if(HalfSpeed)
-					{
-						m_Car.Move(-0.4f, 0.2f, 0.2f, 0f);
-					}
-					else
-					{
-						m_Car.Move(-0.8f, 0.4f, 0.4f, 0f);
-					}
+						m_Car.Move(temp*(-0.8f),temp*(0.4f), temp*(0.4f), 0f);
 					break;
 				case "3":
 					m_Car.Move(0f, 0.0f, 0.0f, 0f);
