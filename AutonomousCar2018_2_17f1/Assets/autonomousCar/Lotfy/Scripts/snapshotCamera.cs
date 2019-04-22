@@ -101,7 +101,7 @@ public class snapshotCamera : MonoBehaviour {
                 string filename = snapShotNameSelfDriving();
                 System.IO.File.WriteAllBytes(filename,bytes);
                 frameCounter=2;
-                Debug.Log("SnapshotTaken");
+                //Debug.Log("SnapshotTaken");
                 }
             }
         }
