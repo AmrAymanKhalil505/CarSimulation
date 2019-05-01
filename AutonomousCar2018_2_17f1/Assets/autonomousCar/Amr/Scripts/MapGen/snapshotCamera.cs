@@ -113,7 +113,7 @@ public class snapshotCamera : MonoBehaviour {
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
         }
         else{
-        String sessionPath=datasetParentPath+"/sharedMemory/scene";
+        String sessionPath=datasetParentPath+"/sharedMemory/";
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
@@ -141,13 +141,13 @@ public class snapshotCamera : MonoBehaviour {
         }
        if(isObstacle==0){
 
-       sessionPath=datasetParentPath+"/Snapshots3/"+currentFolder+"/";
+       sessionPath=datasetParentPath+"/ValidScene/"+currentFolder+"/";
        csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFile.csv";
 
 
        }else{
 
-        sessionPath=datasetParentPath+"/ObstacleSnapshots3/"+currentFolder+"/";
+        sessionPath=datasetParentPath+"/ValidObs/"+currentFolder+"/";
         csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
 
 

@@ -51,6 +51,7 @@ public class CharacterMoving : MonoBehaviour {
     {
         //Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag=="Player"){
+			    
                 NMA.enabled = false;
                 accident = true;
                 person.logAccident(accident);
@@ -101,7 +102,6 @@ public class CharacterMoving : MonoBehaviour {
       //          GameObject obstacle = Instantiate( character  , spawn ,  rotation ) as GameObject;
             	//Debug.Log(NMA.isActiveAndEnabled);
 			if (NMA.isActiveAndEnabled)	{
-
                   NMA.SetDestination(spawn);
 				}
 				

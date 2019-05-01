@@ -4,7 +4,10 @@ using UnityEngine;
 //TODO documentation 
 public class ObstacleManager : MonoBehaviour {
 	private MapGen MG;
-
+  private int coneCount = 0;
+  private float coneX=0.0f;
+  private float coneZ=0.0f;  
+  private int whichLane=0;
 	public void initObstacles( bool staticObs , bool dynamicObs){   
         MG=GetComponent<MapGen>();
 		ArrayList GeneratedMap = MG.GeneratedMap;
@@ -26,26 +29,11 @@ public class ObstacleManager : MonoBehaviour {
           float z = Random.Range( tempTileset.pointsX[j].z ,  tempTileset.pointsY[j].z );
           // Debug.Log(x);
           // Debug.Log(z);
-          //Debug.Log(tempTileset.obstacles[j].tag );
+          // Debug.Log(tempTileset.obstacles[j].tag );
           if(staticObs){
 
        
           if(tempTileset.obstacles[j].tag == "bump"){
-          Vector3 pos = new Vector3(x,5.9f, z);
-           pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
-           Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
-           Vector3 quat = new Vector3(-90,180,90);
-           GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace ,  Quaternion.Euler(tempTileset.CurRotation + quat) ) as GameObject;
-
-          }else if(tempTileset.obstacles[j].tag == "StreetHole"){
-           Vector3 pos = new Vector3(x,6.18f, z);
-           pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
-           Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
-           Vector3 quat = new Vector3(-90,180,90);
-           GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace , Quaternion.Euler(tempTileset.CurRotation + quat)) as GameObject;
-
-          }else if(tempTileset.obstacles[j].tag == "cone"){
-           
            while(z<5 && z>-5){
 
            z = Random.Range( tempTileset.pointsX[j].z , 
@@ -53,13 +41,51 @@ public class ObstacleManager : MonoBehaviour {
            
 
            }
-
+           Vector3 pos = new Vector3(x,5.9f, z);
+           pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
+           Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
+           Vector3 quat = new Vector3(-90,180,90);
+           GameObject obstacle = Instantiate( tempTileset.obstacles[j] , spawnPlace , Quaternion.Euler(tempTileset.CurRotation + quat) ) as GameObject;
+         
+          }else if(tempTileset.obstacles[j].tag == "StreetHole"){
+           Vector3 pos = new Vector3(x,6.18f, z);
+           pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
+           Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
+           Vector3 quat = new Vector3(-90,180,90);
+           GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace , Quaternion.Euler(tempTileset.CurRotation + quat)) as GameObject;
+          }else if(tempTileset.obstacles[j].tag == "cone" ){
+           
+           while(z<5 &&  z>-5 || (z == coneZ)){
+            z = Random.Range( tempTileset.pointsX[j].z , 
+                tempTileset.pointsY[j].z );
+             }
+          if(coneCount == 0){
+           whichLane = Random.Range( 0 , 2 );
+           Debug.Log("coneZ:"+coneZ);
+           Debug.Log("z:"+z);
+           coneCount++;
+           coneX = x;
+           coneZ = z;
            Vector3 pos = new Vector3(x,6.113f, z);
            pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
            Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
            Vector3 quat = new Vector3(-90,180,90);
            GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace ,  Quaternion.Euler(tempTileset.CurRotation + quat) ) as GameObject;
-  
+           }
+           else{
+           coneCount++;
+           if(whichLane==0){
+               coneX+=2;
+           }else{
+               coneX-=2;
+           }
+           Vector3 pos = new Vector3(coneX,6.113f, coneZ);
+           pos = Quaternion.Euler(tempTileset.CurRotation) * pos;
+           Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
+           Vector3 quat = new Vector3(-90,180,90);
+           GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace ,  Quaternion.Euler(tempTileset.CurRotation + quat) ) as GameObject;
+           coneCount = (coneCount==4)?0:coneCount;
+          }
 
 
 
@@ -85,7 +111,7 @@ public class ObstacleManager : MonoBehaviour {
            Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
            Vector3 quat = new Vector3(0,180,0);
            GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace , Quaternion.Euler(tempTileset.CurRotation + quat)) as GameObject;
-            quat = new Vector3(x,-spawnPlace.y,z);
+            quat = new Vector3(0,-spawnPlace.y,30);
             quat = Quaternion.Euler(tempTileset.CurRotation) * quat;
             quat = tempTileset.RoadObj.transform.position - quat;
           //  quat =  Quaternion.Euler(tempTileset.CurRotation) * quat;

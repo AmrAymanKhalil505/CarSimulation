@@ -15,8 +15,8 @@ public class snapshotHelper : MonoBehaviour {
                  string keyName=vKey+"";
                  if(keyName.CompareTo("UpArrow")==0 || keyName.CompareTo("DownArrow")==0 || keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
                  {
-                    snapCam.setcurrentKey(vKey+"");
-                    snapCam.takeSnapshot();
+                    // snapCam.setcurrentKey(vKey+"");
+                    // snapCam.takeSnapshot();
 
                     obsCam.setcurrentKey(vKey+"");
                     obsCam.takeSnapshot();

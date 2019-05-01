@@ -18,7 +18,12 @@ namespace UnityStandardAssets.Vehicles.Car
 
 
         private void FixedUpdate()
-        {
+        {  // if(Input.GetKey(KeyCode.V)){
+            
+        //      m_Car.Move(0f, 0f, 0f, 1f);
+           
+
+        // }else{
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -28,6 +33,7 @@ namespace UnityStandardAssets.Vehicles.Car
 #else
             m_Car.Move(h, v, v, 0f);
 #endif
+     //   }
         }
     }
 }

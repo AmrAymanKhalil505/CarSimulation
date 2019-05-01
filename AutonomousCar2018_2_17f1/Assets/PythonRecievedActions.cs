@@ -32,22 +32,38 @@ public class PythonRecievedActions : MonoBehaviour
 			string[] words = szReceived.Split(' ');//split data into string data is in 2.2 3.3 4.0
 			Debug.Log(words[0]);
 			// which direction will we move the car in, f--> foreward , b--> backward , r--> right , l--> left
+			Debug.Log(m_Car.CurrentSpeed);
 			switch (words[0]) 
       		{
 				case "2":
 				    Debug.Log("right");
-				    m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
+					 if(m_Car.CurrentSpeed > 20.0){
+				     Debug.Log("brake right");
+                     m_Car.Move(1.0f, 0.2f, 0.2f, 0f);
+                     }else{
+					 m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
+					 }
 					break;
-				case "b":
-					m_Car.Move(0f, -1.0f, -1.0f, 0f);
+				case "s":
+					m_Car.Move(0f, 0f, 0f, 0f);
 					break;
 				case "1":
 			    	Debug.Log("left");
-					m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
-					break;
+				    if(m_Car.CurrentSpeed > 20.0){
+					    Debug.Log("brake left");
+                       	m_Car.Move(-1.0f, 0.2f, 0.2f, 0f);
+                     }else{
+					   m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
+					 }
+					 break;
 				case "0":
 				    Debug.Log("brake");
-					m_Car.Move(0f, -1.0f, -1.0f, 0f);
+					if(m_Car.CurrentSpeed < 20.0){
+                     m_Car.Move(0f, 1.0f, 1.0f, 0f);
+                     }else{
+						m_Car.Move(0f, -0.5f, -0.5f, 0f);
+					 }
+					
 					break;
 				case "3":{
 				    Debug.Log("forward");

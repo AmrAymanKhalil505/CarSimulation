@@ -48,6 +48,12 @@ MonoBehaviour:
   - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
   - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
   - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
   pointsX:
   - {x: 0, y: 0, z: 31}
   - {x: -14.2, y: 0, z: 29}
@@ -57,10 +63,22 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 31}
   - {x: 0, y: 0, z: 31}
   - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
   pointsY:
   - {x: 0, y: 0, z: -31}
   - {x: 11, y: 0, z: -31}
   - {x: 11, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
   - {x: 0, y: 0, z: -31}
   - {x: 0, y: 0, z: -31}
   - {x: 0, y: 0, z: -31}

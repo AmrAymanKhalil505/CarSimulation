@@ -11,7 +11,7 @@ using System.Text;
 public class obstacleCamera : MonoBehaviour {
 
     public Boolean recording;
-    Camera snapCam;
+    public Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
     private String datasetParentPath="C:/Users/Loai/Desktop";
@@ -70,9 +70,9 @@ public class obstacleCamera : MonoBehaviour {
     void LateUpdate()
     {
         if(recording)
-        {
+        {   
             if(snapCam.gameObject.activeInHierarchy)
-            {
+            {  
                 Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
@@ -85,8 +85,8 @@ public class obstacleCamera : MonoBehaviour {
         }
         else
         {
-            if(--frameCounter<=0)
-            {
+            // if(--frameCounter<=0)
+            // {
                 Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
@@ -94,9 +94,9 @@ public class obstacleCamera : MonoBehaviour {
                 byte[] bytes = snapShot.EncodeToJPG();
                 string filename = snapShotNameSelfDriving();
                 System.IO.File.WriteAllBytes(filename,bytes);
-                frameCounter=2;
+               // frameCounter=2;
                 // Debug.Log("SnapshotTaken");
-            }
+           // }
         }
     }
 
@@ -107,20 +107,19 @@ public class obstacleCamera : MonoBehaviour {
 
     string snapShotNameSelfDriving(){
         if(isObstacle==1){
-        String sessionPath=datasetParentPath+"/sharedMemory/obstacles";
+        String sessionPath=datasetParentPath+"/sharedMemory/";
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
-        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
+        return string.Format(sessionPath+imageName+".png",Application.dataPath);
         }
         else{
-        String sessionPath=datasetParentPath+"/sharedMemory/scene";
+        String sessionPath=datasetParentPath+"/sharedMemory/";
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
-
-
-        }
+       }
     }
+
 
     string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file
     {
@@ -129,29 +128,28 @@ public class obstacleCamera : MonoBehaviour {
         String sessionPath;
         String csvFilePath;
         String currentFolder="";
-        switch(currentKey){
+        
+            switch(currentKey) {  
+            case("UpArrow"): currentFolder = "up";      break;
+            case("RightArrow"): currentFolder = "right";break;
+            case("LeftArrow"): currentFolder = "left";  break;
+            case("DownArrow"): currentFolder = "brake"; break;
+            // case("V"): currentFolder = "stop"; break;
+            default: break; 
+            }
 
-        case("UpArrow"): currentFolder = "up";break;
-        case("RightArrow"): currentFolder = "right";break;
-        case("LeftArrow"): currentFolder = "left";break;
-        case("DownArrow"): currentFolder = "brake";break;
-        default:break;
+            if(isObstacle==0){
 
-
-        }
-       if(isObstacle==0){
-
-       sessionPath=datasetParentPath+"/Snapshots3/"+currentFolder+"/";
-       csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFile.csv";
-
-
-       }else{
-
-        sessionPath=datasetParentPath+"/ObstacleSnapshots3/"+currentFolder+"/";
-        csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
+            sessionPath=datasetParentPath+"/ValidScene/"+currentFolder+"/";
+            csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFile.csv";
 
 
-       }
+            }else{
+
+                sessionPath=datasetParentPath+"/StaticValid/"+currentFolder+"/";
+                csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
+
+            }
 
 
 
@@ -162,11 +160,11 @@ public class obstacleCamera : MonoBehaviour {
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
 
-        Debug.Log(currentKey+"");
+        // Debug.Log(currentKey+"");
 
          csvContent.AppendLine(imageName +","+ currentKey);
          File.AppendAllText(csvFilePath, csvContent.ToString());
-         csvContent= new StringBuilder(); // clearng the string builder
+         csvContent= new StringBuilder(); // clearing the string builder
 
 
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);

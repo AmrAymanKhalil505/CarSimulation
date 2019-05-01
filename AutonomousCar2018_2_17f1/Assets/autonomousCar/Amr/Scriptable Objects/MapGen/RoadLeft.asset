@@ -46,7 +46,16 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: -90, z: 0}
   - {x: 0, y: -180, z: 0}
-  obstacles: []
-  pointsX: []
-  pointsY: []
+  obstacles:
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  pointsX:
+  - {x: -13, y: 0, z: 10}
+  - {x: -13, y: 0, z: 10}
+  - {x: -13, y: 0, z: 10}
+  pointsY:
+  - {x: 12.6, y: 0, z: -31}
+  - {x: 12.6, y: 0, z: -31}
+  - {x: 12.6, y: 0, z: -31}
   count: 

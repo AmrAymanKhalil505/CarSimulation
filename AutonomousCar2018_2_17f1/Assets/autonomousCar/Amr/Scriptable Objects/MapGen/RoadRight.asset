@@ -49,14 +49,14 @@ MonoBehaviour:
   obstacles:
   - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
   - {fileID: 1977796281193266, guid: c03d7a141f014664fa3e50871bc681a8, type: 2}
-  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
   - {fileID: 1977796281193266, guid: c03d7a141f014664fa3e50871bc681a8, type: 2}
   - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
   pointsX:
   - {x: 12, y: 0, z: -32}
-  - {x: 0, y: 0, z: -35}
+  - {x: -11, y: 0, z: -35}
   - {x: 12, y: 0, z: -32}
-  - {x: -13, y: 0, z: -35}
+  - {x: -11, y: 0, z: -35}
   - {x: 12, y: 0, z: -32}
   pointsY:
   - {x: -14, y: 0, z: 9.7}
