@@ -10,38 +10,37 @@ using System.Text;
 
 public class snapshotCamera : MonoBehaviour {
 
-    public Boolean recording;
-    public Boolean sharedMemory2;
-
-    public Boolean saveInSharedMemory;
-
-    public String currentTakenAction;
+    public Boolean rearCamera;
+    public Boolean agentIsDriving;
+    public string agentID;
     Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
-
+    public Boolean recording;
+    public Boolean logActionsInCSVFile;
+    public String datasetSector;
+    public String currentTakenAction;
     public String datasetParentPath;
     public String sessionID;
 
     private String currentKey;
+
+    private static Texture2D currentImage;
 
     int resWidth = 1080;
     int resHeight = 1080;
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
-    private byte[] currentImage; 
-
-    public byte[] getCurrentImage()
+    public Texture2D getCurrentImage()
     {
+        // Debug.Log("get: "+currentImage.Length);
         return currentImage;
     }
-
     public void setRecording(bool flag){
         recording=flag;
     }
     private void Awake()
     {
-        // The snapshot camera part
 
         snapCam = GetComponent<Camera>();
         if (snapCam.targetTexture == null)
@@ -82,6 +81,7 @@ public class snapshotCamera : MonoBehaviour {
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
                 byte[] bytes = snapShot.EncodeToJPG();
+                currentImage=snapShot;
                 string filename = snapShotName();
                 System.IO.File.WriteAllBytes(filename,bytes);
                 snapCam.gameObject.SetActive(false);
@@ -89,7 +89,7 @@ public class snapshotCamera : MonoBehaviour {
         }
         else
         {
-            if(saveInSharedMemory)
+            if(agentIsDriving)
             {
                 if(--frameCounter<=0)
                 {
@@ -101,7 +101,6 @@ public class snapshotCamera : MonoBehaviour {
                 string filename = snapShotNameSelfDriving();
                 System.IO.File.WriteAllBytes(filename,bytes);
                 frameCounter=2;
-                //Debug.Log("SnapshotTaken");
                 }
             }
         }
@@ -114,13 +113,13 @@ public class snapshotCamera : MonoBehaviour {
 
     string snapShotNameSelfDriving(){
         String sessionPath;
-        if(sharedMemory2)
+        if(rearCamera)
         {
-             sessionPath=datasetParentPath+"/sharedMemory2/";
+            sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"_rearCamera/";
         }
         else
         {
-             sessionPath=datasetParentPath+"/sharedMemory/";
+            sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"_frontCamera/";
         }
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
@@ -130,10 +129,28 @@ public class snapshotCamera : MonoBehaviour {
     string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file
     {
 
-        //      /Users/MohamedAshraf/Desktop this is my cureent local path
+        //   /Users/MohamedAshraf/Desktop this is my cureent local path
 
-        String sessionPath=datasetParentPath+"/validation/"+currentTakenAction;
-        //String csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
+        String sessionPath=datasetParentPath+"/Dataset/front/"+datasetSector+"/"+currentTakenAction;
+
+        if(rearCamera)
+        {
+            sessionPath=datasetParentPath+"/Dataset/rear/"+datasetSector+"/"+currentTakenAction;
+        }
+
+        String csvFilePath="";
+        if(logActionsInCSVFile)
+        {
+            if(rearCamera)
+            {
+                csvFilePath=datasetParentPath+"/CSV_Data_RearCamera/"+"CSVFile.csv";
+            }
+            else
+            {
+                csvFilePath=datasetParentPath+"/CSV_Data_FrontCamera/"+"CSVFile.csv";
+            }
+        }
+        
 
         System.IO.Directory.CreateDirectory(datasetParentPath);
         System.IO.Directory.CreateDirectory(sessionPath);
@@ -142,11 +159,14 @@ public class snapshotCamera : MonoBehaviour {
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
 
-        //Debug.Log(currentKey+"");
 
-         //csvContent.AppendLine(imageName +","+ currentKey);
-         //File.AppendAllText(csvFilePath, csvContent.ToString());
-         //csvContent= new StringBuilder(); // clearng the string builder
+        if(logActionsInCSVFile)
+        {
+            csvContent.AppendLine(imageName +","+ currentKey);
+            File.AppendAllText(csvFilePath, csvContent.ToString());
+            csvContent= new StringBuilder(); // clearng the string builder
+        }
+         
 
 
         return string.Format(sessionPath+"/"+imageName+ ".png",Application.dataPath);

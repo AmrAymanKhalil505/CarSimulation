@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class snapshotHelper : MonoBehaviour {
 
-    public snapshotCamera snapCam;
+    public snapshotCamera frontSnapCam;
+    public snapshotCamera rearSnapCam;
 	// Update is called once per frame
 
 	void Update () 
@@ -13,11 +14,14 @@ public class snapshotHelper : MonoBehaviour {
              if(Input.GetKey(vKey)){
                  string keyName=vKey+"";
                  //if(keyName.CompareTo("UpArrow")==0 ||keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
-                 if(keyName.CompareTo("LeftArrow")==0)
+                 if(keyName.CompareTo("Q")==0)
                  {
                     Debug.Log("snapshotTaken");
-                    snapCam.setcurrentKey(vKey+"");
-                    snapCam.takeSnapshot();
+                    frontSnapCam.setcurrentKey(vKey+"");
+                    frontSnapCam.takeSnapshot();
+
+                    rearSnapCam.setcurrentKey(vKey+"");
+                    rearSnapCam.takeSnapshot();
                  } 
              }
          }
