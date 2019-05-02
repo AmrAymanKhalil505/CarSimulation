@@ -15,7 +15,7 @@ public class snapshotHelper : MonoBehaviour {
     void start()
     {
         frontSnapCam.setSessionID(sessionID);
-        rearSnapCam.setSessionID(sessionID);1
+        rearSnapCam.setSessionID(sessionID);
     }
 
 	void Update () 
