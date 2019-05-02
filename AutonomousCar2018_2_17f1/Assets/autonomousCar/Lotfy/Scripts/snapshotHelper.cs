@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
 
 public class snapshotHelper : MonoBehaviour {
 
     public snapshotCamera frontSnapCam;
     public snapshotCamera rearSnapCam;
+
+    public String sessionID;
 	// Update is called once per frame
+
+    void start()
+    {
+        frontSnapCam.setSessionID(sessionID);
+        rearSnapCam.setSessionID(sessionID);1
+    }
 
 	void Update () 
     {    

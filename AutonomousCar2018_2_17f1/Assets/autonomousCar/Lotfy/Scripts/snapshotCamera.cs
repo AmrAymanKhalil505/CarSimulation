@@ -20,7 +20,7 @@ public class snapshotCamera : MonoBehaviour {
     public String datasetSector;
     public String currentTakenAction;
     public String datasetParentPath;
-    public String sessionID;
+    private static String sessionID;
 
     private String currentKey;
 
@@ -30,6 +30,11 @@ public class snapshotCamera : MonoBehaviour {
     int resHeight = 1080;
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
+
+    public void setSessionID(String incomingSessionID)
+    {
+        sessionID=incomingSessionID;
+    }
 
     public Texture2D getCurrentImage()
     {
