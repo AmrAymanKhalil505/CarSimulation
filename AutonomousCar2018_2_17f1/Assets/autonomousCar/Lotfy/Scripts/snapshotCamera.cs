@@ -26,8 +26,8 @@ public class snapshotCamera : MonoBehaviour {
 
     private static Texture2D currentImage;
 
-    int resWidth = 1080;
-    int resHeight = 1080;
+    int resWidth = 128;
+    int resHeight = 128;
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
@@ -38,8 +38,9 @@ public class snapshotCamera : MonoBehaviour {
 
     public Texture2D getCurrentImage()
     {
-        // Debug.Log("get: "+currentImage.Length);
+        Debug.Log("get: "+currentImage.width);
         return currentImage;
+        //return new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
     }
     public void setRecording(bool flag){
         recording=flag;
@@ -86,7 +87,8 @@ public class snapshotCamera : MonoBehaviour {
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
                 byte[] bytes = snapShot.EncodeToJPG();
-                currentImage=snapShot;
+                //snapShot.Resize(128,128);
+                //currentImage=snapShot;
                 string filename = snapShotName();
                 System.IO.File.WriteAllBytes(filename,bytes);
                 snapCam.gameObject.SetActive(false);
@@ -102,9 +104,11 @@ public class snapshotCamera : MonoBehaviour {
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-                byte[] bytes = snapShot.EncodeToJPG();
-                string filename = snapShotNameSelfDriving();
-                System.IO.File.WriteAllBytes(filename,bytes);
+                // snapShot.Resize(128,128);
+                currentImage=snapShot;
+                // byte[] bytes = snapShot.EncodeToJPG();
+                // string filename = snapShotNameSelfDriving();
+                // System.IO.File.WriteAllBytes(filename,bytes);
                 frameCounter=2;
                 }
             }
