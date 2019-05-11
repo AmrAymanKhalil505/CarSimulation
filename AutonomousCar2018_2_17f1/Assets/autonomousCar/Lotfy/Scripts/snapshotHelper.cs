@@ -99,19 +99,19 @@ public class snapshotHelper : MonoBehaviour {
 		// Get raw pixel values from texture, format for inputImg array
 		for (int i = 0; i < img_width; i++) {
 			for (int j = 0; j < img_height; j++) {
-				inputImg [0, img_width - i - 1, j, 0] = input.GetPixel(j, i).r;
-				inputImg [0, img_width - i - 1, j, 1] = input.GetPixel(j, i).g;
-				inputImg [0, img_width - i - 1, j, 2] = input.GetPixel(j, i).b;
+				inputImg [0,img_width - i - 1, j, 0] = input.GetPixel(j, i).r;
+				inputImg [0,img_width - i - 1, j, 1] = input.GetPixel(j, i).g;
+				inputImg [0,img_width - i - 1, j, 2] = input.GetPixel(j, i).b;
 			}
 		}
 		
-		if(temp==0){
-		String s=showArray(inputImg,128,128);
-		StreamWriter sw = new StreamWriter("/Users/MohamedAshraf/Desktop/test.txt");
-		sw.WriteLine(s);
-		sw.Close();
-		Debug.Log("************Done");
-		}
+		// if(temp==0){
+		// String s=showArray(inputImg,128,128);
+		// StreamWriter sw = new StreamWriter("/Users/MohamedAshraf/Desktop/test.txt");
+		// sw.WriteLine(s);
+		// sw.Close();
+		// Debug.Log("************Done");
+		// }
 		
 
 		// Create the TensorFlow model
