@@ -53,3 +53,14 @@ crashlytics-build.properties
 AutonomousCar2018_2_17f1/Assets/autonomousCar/.DS_Store
 AutonomousCar2018_2_17f1/Assets/autonomousCar/.DS_Store
 AutonomousCar2018_2_17f1/Assets/autonomousCar/.DS_Store
+*.meta
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/Computer/liblibtensorflow.so
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/Computer/libtensorflow.dll
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/Computer/TensorFlowSharp.dll
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/iOS/libprotobuf.a
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/iOS/libtensorflow-core.a
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/System.Numerics.dll
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/iOS/libprotobuf-lite.a
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/System.ValueTuple.dll
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/Computer/libtensorflow.bundle
+AutonomousCar2018_2_17f1/Assets/ML-Agents/Plugins/iOS/TensorFlowSharp.dll
