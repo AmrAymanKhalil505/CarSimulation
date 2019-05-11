@@ -38,9 +38,7 @@ public class snapshotCamera : MonoBehaviour {
 
     public Texture2D getCurrentImage()
     {
-        Debug.Log("get: "+currentImage.width);
         return currentImage;
-        //return new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
     }
     public void setRecording(bool flag){
         recording=flag;
@@ -52,11 +50,6 @@ public class snapshotCamera : MonoBehaviour {
         if (snapCam.targetTexture == null)
         {
             snapCam.targetTexture = new RenderTexture(resWidth, resHeight, 24);
-        }
-        else
-        {
-            resWidth = snapCam.targetTexture.width;
-            resWidth = snapCam.targetTexture.height;
         }
         if(recording)
         {
@@ -87,8 +80,6 @@ public class snapshotCamera : MonoBehaviour {
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
                 byte[] bytes = snapShot.EncodeToJPG();
-                //snapShot.Resize(128,128);
-                //currentImage=snapShot;
                 string filename = snapShotName();
                 System.IO.File.WriteAllBytes(filename,bytes);
                 snapCam.gameObject.SetActive(false);
@@ -104,12 +95,12 @@ public class snapshotCamera : MonoBehaviour {
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-                // snapShot.Resize(128,128);
                 currentImage=snapShot;
                 // byte[] bytes = snapShot.EncodeToJPG();
-                // string filename = snapShotNameSelfDriving();
+                // string filename = snapShotName();
                 // System.IO.File.WriteAllBytes(filename,bytes);
-                frameCounter=2;
+                // snapCam.gameObject.SetActive(false);
+                //frameCounter=2;
                 }
             }
         }
