@@ -438,14 +438,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d6f4b8030d84b53a54500f67dd92a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentIsDriving: 0
+  agentIsDriving: 1
   agentID: 1
-  recording: 1
+  recording: 0
   logActionsInCSVFile: 0
   datasetSector: train
-  currentTakenAction: st
+  currentTakenAction: right
   datasetParentPath: /Users/MohamedAshraf/Desktop
-  sessionID: 1
+  sessionID: 23
 --- !u!81 &668701428
 AudioListener:
   m_ObjectHideFlags: 0
@@ -690,7 +690,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.y
@@ -723,7 +723,7 @@ Prefab:
     - target: {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4714960871855366, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalRotation.x
@@ -857,6 +857,16 @@ Prefab:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Topspeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_MaximumSteerAngle
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
   m_IsPrefabAsset: 0
@@ -888,11 +898,11 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835950771}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c60811a8da08455489aa11875d05544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
-  Port: 1234
+  Port: 1240
   HalfSpeed: 0

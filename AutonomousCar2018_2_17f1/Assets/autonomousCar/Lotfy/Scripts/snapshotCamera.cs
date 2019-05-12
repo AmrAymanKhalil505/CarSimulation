@@ -94,7 +94,7 @@ public class snapshotCamera : MonoBehaviour {
 
     string snapShotNameSelfDriving(){
         String sessionPath;
-        sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID;
+        sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"/";
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
