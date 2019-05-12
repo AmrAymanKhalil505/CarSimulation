@@ -10,7 +10,6 @@ using System.Text;
 
 public class snapshotCamera : MonoBehaviour {
 
-    public Boolean rearCamera;
     public Boolean agentIsDriving;
     public string agentID;
     Camera snapCam;
@@ -20,29 +19,12 @@ public class snapshotCamera : MonoBehaviour {
     public String datasetSector;
     public String currentTakenAction;
     public String datasetParentPath;
-    private static String sessionID;
-
+    public String sessionID;
     private String currentKey;
-
-    private static Texture2D currentImage;
-
     int resWidth = 128;
     int resHeight = 128;
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
-
-    public void setSessionID(String incomingSessionID)
-    {
-        sessionID=incomingSessionID;
-    }
-
-    public Texture2D getCurrentImage()
-    {
-        return currentImage;
-    }
-    public void setRecording(bool flag){
-        recording=flag;
-    }
     private void Awake()
     {
 
@@ -95,12 +77,11 @@ public class snapshotCamera : MonoBehaviour {
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
                 snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-                currentImage=snapShot;
-                // byte[] bytes = snapShot.EncodeToJPG();
-                // string filename = snapShotName();
-                // System.IO.File.WriteAllBytes(filename,bytes);
-                // snapCam.gameObject.SetActive(false);
-                //frameCounter=2;
+                byte[] bytes = snapShot.EncodeToJPG();
+                string filename = snapShotNameSelfDriving();
+                System.IO.File.WriteAllBytes(filename,bytes);
+                snapCam.gameObject.SetActive(false);
+                frameCounter=2;
                 }
             }
         }
@@ -113,14 +94,7 @@ public class snapshotCamera : MonoBehaviour {
 
     string snapShotNameSelfDriving(){
         String sessionPath;
-        if(rearCamera)
-        {
-            sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"_rearCamera/";
-        }
-        else
-        {
-            sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"_frontCamera/";
-        }
+        sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID;
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
@@ -131,24 +105,12 @@ public class snapshotCamera : MonoBehaviour {
 
         //   /Users/MohamedAshraf/Desktop this is my cureent local path
 
-        String sessionPath=datasetParentPath+"/Dataset/front/"+datasetSector+"/"+currentTakenAction;
-
-        if(rearCamera)
-        {
-            sessionPath=datasetParentPath+"/Dataset/rear/"+datasetSector+"/"+currentTakenAction;
-        }
+        String sessionPath=datasetParentPath+"/FinalDataset/"+datasetSector+"/"+currentTakenAction;
 
         String csvFilePath="";
         if(logActionsInCSVFile)
         {
-            if(rearCamera)
-            {
-                csvFilePath=datasetParentPath+"/CSV_Data_RearCamera/"+"CSVFile.csv";
-            }
-            else
-            {
-                csvFilePath=datasetParentPath+"/CSV_Data_FrontCamera/"+"CSVFile.csv";
-            }
+            csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
         }
         
 
@@ -166,9 +128,6 @@ public class snapshotCamera : MonoBehaviour {
             File.AppendAllText(csvFilePath, csvContent.ToString());
             csvContent= new StringBuilder(); // clearng the string builder
         }
-         
-
-
         return string.Format(sessionPath+"/"+imageName+ ".png",Application.dataPath);
          
     }
