@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 85.6
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -212,6 +212,10 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400910149654200, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
@@ -443,9 +447,9 @@ MonoBehaviour:
   recording: 0
   logActionsInCSVFile: 0
   datasetSector: train
-  currentTakenAction: right
+  currentTakenAction: test
   datasetParentPath: /Users/MohamedAshraf/Desktop
-  sessionID: 23
+  sessionID: 5
 --- !u!81 &668701428
 AudioListener:
   m_ObjectHideFlags: 0
@@ -860,12 +864,17 @@ Prefab:
     - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Topspeed
-      value: 35
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_MaximumSteerAngle
-      value: 50
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_SlipLimit
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
@@ -904,5 +913,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
-  Port: 1240
+  Port: 1211
   HalfSpeed: 0

@@ -45,6 +45,11 @@ public class snapshotCamera : MonoBehaviour {
 
     }
 
+    public Boolean isRecording()
+    {
+        return recording;
+    }
+
     public void takeSnapshot()
     {
         snapCam.gameObject.SetActive(true);
