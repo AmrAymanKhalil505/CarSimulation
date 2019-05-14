@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: RoadLeft
   m_EditorClassIdentifier: Assembly-CSharp::RoadSTObject
-  RoadObj: {fileID: 1162973888199058, guid: d654eb34a882a4d428551ce8639f60e1, type: 2}
+  RoadObj: {fileID: 1177980056866268, guid: a0e60b3bc7956482dbf323884791a523, type: 2}
   RoadName: Left
   Percentage: 1
   SizeMin: {x: -28, y: 0, z: -28}

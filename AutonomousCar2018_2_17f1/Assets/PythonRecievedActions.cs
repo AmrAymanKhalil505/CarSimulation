@@ -41,15 +41,15 @@ public class PythonRecievedActions : MonoBehaviour
       		{
 				
 				case "2":
-						m_Car.Move(0f, temp*0.8f, temp*0.8f, 0f);	
+						m_Car.Move(0f, temp*0.6f, temp*0.6f, 0f);	
 						Debug.Log("foreward");
 					break;
 				case "1":
-						m_Car.Move(temp*(0.8f),temp*(0.2f), temp*(0.2f), 0f);
+						m_Car.Move(1.0f,temp*(0.4f), temp*(0.4f), 0f);
 						Debug.Log("right");
 					break;
 				case "0":
-						m_Car.Move(temp*(-0.8f), temp*(0.2f),temp*(0.2f), 0f);
+						m_Car.Move(-1.0f, temp*(0.2f),temp*(0.2f), 0f);
 						Debug.Log("left");
 					break;
 				case "3":

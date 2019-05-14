@@ -25,6 +25,10 @@ public class snapshotCamera : MonoBehaviour {
     int resHeight = 128;
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
+
+    public bool getRecording(){
+        return recording;
+    }
     private void Awake()
     {
 
@@ -40,6 +44,14 @@ public class snapshotCamera : MonoBehaviour {
         else
         {
             snapCam.gameObject.SetActive(true);
+        }
+
+        string root = datasetParentPath+"/sharedMemory_agent#"+agentID+"/";        
+        // If directory does not exist, don't even try   
+        if (Directory.Exists(root))  
+        {  
+            Directory.Delete(root,true);  
+            Debug.Log("shared memory is cleared");
         }
         
 

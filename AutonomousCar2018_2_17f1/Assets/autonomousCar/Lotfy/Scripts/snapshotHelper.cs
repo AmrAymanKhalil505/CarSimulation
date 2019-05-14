@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -13,22 +14,28 @@ public class snapshotHelper : MonoBehaviour {
     int counter=5;
 	void Update () 
     {    
-        // foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
-        // {
-        //     if(Input.GetKey(vKey))
-        //     {
-        //         string keyName=vKey+"";
-        //         //if(keyName.CompareTo("UpArrow")==0 ||keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
-        //         if(keyName.CompareTo("Q")==0)
-        //         {
-        //         snapCam.takeSnapshot();
-        //         }
-        //     }
-        // }
-        if(counter--<=2){
+        if(snapCam.getRecording())
+        {
+            foreach(KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if(Input.GetKey(vKey))
+            {
+                string keyName=vKey+"";
+                //if(keyName.CompareTo("UpArrow")==0 ||keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
+                if(keyName.CompareTo("Q")==0)
+                {
+                snapCam.takeSnapshot();
+                Debug.Log("snapshot taken");
+                }
+            }
+        }
+        }
+        else{
+            if(counter--<=5){
             snapCam.takeSnapshot();
             counter=5;
         }
-        
+        }
+         
     }
 }
