@@ -21,6 +21,7 @@ public class PythonRecievedActions : MonoBehaviour
 
 	public void Changing()
 	{
+		// float speed=m_Car.CurrentSpeed;
 		client = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		client.Connect (IP, Port);//connecting port with ip address 
 
