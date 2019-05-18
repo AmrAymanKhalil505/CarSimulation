@@ -38,5 +38,6 @@ public class RoadSTObject : ScriptableObject {
 	public Vector3[] pointsY;
     public int[] count; 
 	
+	public Hashtable spawnedIn;
 
 }

@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Crouching;
 
         bool accident;
-
+ 		bool nearCar;
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
@@ -131,15 +131,34 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 	   }
 
+	   public void logStop(bool car){
+
+    
+      nearCar = car;
+	   }
+
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
 			//Debug.Log("forward"+m_ForwardAmount);
-			m_Animator.SetFloat("Forward",0.5f, 0.1f, Time.deltaTime);
+			if(nearCar){
+            	m_Animator.SetFloat("Forward",0f, 0f, Time.deltaTime);
+					m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetBool("Crouch", m_Crouching);
+			m_Animator.SetBool("OnGround", true);
+
+			}else{
+      
+	        m_Animator.SetFloat("Forward",0.5f, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", true);
-            m_Animator.SetBool("DeathTrigger", accident);
+
+
+
+			}
+		
+	       m_Animator.SetBool("DeathTrigger", accident);
           
          //  Debug.Log(m_Rigidbody.velocity.y);
 		//    Debug.Log("accident value "+ accident);

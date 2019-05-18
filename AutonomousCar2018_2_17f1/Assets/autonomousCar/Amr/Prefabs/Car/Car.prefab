@@ -599,7 +599,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400910149654200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 85.6, z: 8.5}
+  m_LocalPosition: {x: 0, y: 87.86, z: 8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4714960871855366}
@@ -740,7 +740,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1455577811214060}
   m_LocalRotation: {x: 0.077241085, y: 0, z: 0, w: 0.99701244}
-  m_LocalPosition: {x: 0, y: 1.36, z: 0.87}
+  m_LocalPosition: {x: 0, y: 1.07, z: 1.38}
   m_LocalScale: {x: 1, y: 2.14, z: 1}
   m_Children: []
   m_Father: {fileID: 4007442472566568}
@@ -2547,7 +2547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recording: 1
   snapCam: {fileID: 20547873031532606}
-  sessionID: 51
+  sessionID: 120
   isObstacle: 1
 --- !u!114 &114869950079565656
 MonoBehaviour:
@@ -2585,7 +2585,7 @@ MonoBehaviour:
   m_MaxHandbrakeTorque: 100000000
   m_Downforce: 100
   m_SpeedType: 0
-  m_Topspeed: 50
+  m_Topspeed: 35
   m_RevRangeBoundary: 1
   m_SlipLimit: 0.3
   m_BrakeTorque: 50000

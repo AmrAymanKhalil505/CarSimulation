@@ -7,7 +7,10 @@ public class CarCollision : MonoBehaviour {
 
  if(col.gameObject.tag == "TrafficCar"){ 
   Debug.Log("COLLIDE!!");
- Destroy(col.gameObject); 
+  Destroy(col.gameObject); 
+ }else if(col.gameObject.tag == "cone"){
+    Destroy(col.gameObject,5); 
+
  }
  }
 }

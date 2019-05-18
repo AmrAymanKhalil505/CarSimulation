@@ -138,20 +138,10 @@ public class obstacleCamera : MonoBehaviour {
             default: break; 
             }
 
-            if(isObstacle==0){
+           
 
-            sessionPath=datasetParentPath+"/ValidScene/"+currentFolder+"/";
-            csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFile.csv";
-
-
-            }else{
-
-                sessionPath=datasetParentPath+"/StaticValid/"+currentFolder+"/";
-                csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
-
-            }
-
-
+         sessionPath=datasetParentPath+"/StaticValid/"+currentFolder+"/";
+         csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
 
         System.IO.Directory.CreateDirectory(datasetParentPath);
         System.IO.Directory.CreateDirectory(sessionPath);

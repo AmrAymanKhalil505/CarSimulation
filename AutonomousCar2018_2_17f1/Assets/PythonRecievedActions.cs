@@ -39,7 +39,7 @@ public class PythonRecievedActions : MonoBehaviour
 				    Debug.Log("right");
 					 if(m_Car.CurrentSpeed > 20.0){
 				     Debug.Log("brake right");
-                     m_Car.Move(1.0f, 0.2f, 0.2f, 0f);
+                     m_Car.Move(1.0f, 0f, 0f, 0f);
                      }else{
 					 m_Car.Move(1.0f, 0.5f, 0.5f, 0f);
 					 }
@@ -51,7 +51,7 @@ public class PythonRecievedActions : MonoBehaviour
 			    	Debug.Log("left");
 				    if(m_Car.CurrentSpeed > 20.0){
 					    Debug.Log("brake left");
-                       	m_Car.Move(-1.0f, 0.2f, 0.2f, 0f);
+                       	m_Car.Move(-1.0f, 0f, 0f, 0f);
                      }else{
 					   m_Car.Move(-1.0f, 0.5f, 0.5f, 0f);
 					 }
@@ -74,7 +74,7 @@ public class PythonRecievedActions : MonoBehaviour
 		} 
 		else
 		{
-			Debug.Log (" Not Connected");
+			Debug.Log ("Not Connected");
 		}
 		client.Close();	
 	}

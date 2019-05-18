@@ -11,6 +11,7 @@ TagManager:
   - man
   - cube
   - TrafficCar
+  - bus
   layers:
   - Default
   - TransparentFX
