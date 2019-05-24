@@ -140,7 +140,7 @@ public class obstacleCamera : MonoBehaviour {
 
            
 
-         sessionPath=datasetParentPath+"/StaticValid/"+currentFolder+"/";
+         sessionPath=datasetParentPath+"/ObstaclesData/"+currentFolder+"/";
          csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
 
         System.IO.Directory.CreateDirectory(datasetParentPath);

@@ -454,22 +454,22 @@ Prefab:
     - target: {fileID: 114865853277052564, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: sessionID
-      value: 120
+      value: 121
       objectReference: {fileID: 0}
     - target: {fileID: 114909760914746120, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114938637115008992, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114865853277052564, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
       propertyPath: recording
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
         type: 2}
@@ -478,15 +478,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4007442472566568, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869950079565656, guid: 5548d58447b9d474abcb5f3f35f3d7d6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5548d58447b9d474abcb5f3f35f3d7d6, type: 2}
