@@ -1,151 +1,133 @@
-﻿using System.Collections;
+﻿// Names: Mohamed Lotfy
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-
 using System.Text;
 
+
+/* Functions : setcurrentKey, Awake, LateUpdate, takeSnapshot, snapShotNameAut, snapshotNameRec
+Date Edited : 26/5/2019
+*/
+
+
 [RequireComponent(typeof(Camera))]
-
 public class snapshotCamera : MonoBehaviour {
-
-    public Boolean agentIsDriving;
-    public string agentID;
-    Camera snapCam;
-    StringBuilder csvContent = new StringBuilder();
-    public Boolean recording;
-    public Boolean logActionsInCSVFile;
-    public String datasetSector;
-    public String currentTakenAction;
-    public String datasetParentPath;
-    public String sessionID;
-    private String currentKey;
-    int resWidth = 128;
-    int resHeight = 128;
-    int frameCounter=0;
-    long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
-
-    public bool getRecording(){
-        return recording;
+    /* variables */
+    public Boolean rearCamera;       /* flag to differentiate between the front and the rear cameras */
+    public Boolean autonomousMode;   /* flag to activate the autonomus driving mode */
+    public Boolean recordingMode;    /* flag to activate the recording mode */
+    public Boolean logInCSV;         /* flag to activate the logging of the actions taken for every snapshot into the CSV file */
+    public string agentID;           /* the id of this car instance as there may be multiple cars on track */
+    public String sessionID;         /* the id of the recording session*/
+    public int snapshotsPerSession;  /* the number of desired snapshots the teacher would like to capture for this session*/
+    public String datasetSector;     /* the sector of the dataset which the recorded snapshots should flow into (train, test, validate) */
+    public String currentTakenAction;/* the current action taken by the teacher while driving the car in the recording mode*/
+    public String datasetPath;       /* the path where the dataset should reside*/
+    int resWidth = 128;              /* resolution width of the taken snapshot */
+    int resHeight = 128;             /* resolution height of the taken snapshot */
+    long numericId = -1;             /* the ID number of the taken snapshot */
+    int framesToSkip = 0;            /* number of frames to drop while recording */
+    String snapshotPath;             /* the path where the current taken snapshot should be saved in */
+    String csvFilePath;              /* the path for the CSV file in the dataset */
+    String idTag;                    /* the numeric ID of the snapshot */
+    String imageName;                /* the full ID of the snapshot */
+    Camera snapCam;                  /* refrence for the camera used in capturing the snapshots */
+    private String currentKey;       /* the current key pressed by the teacher in the recording mode */ 
+    StringBuilder csvContent = new StringBuilder(); /* the string builder used to write into the CSV file */
+    /* function */
+    /* used to initialize the current key variable to hold the value of the current key pressed 
+       so that it can be logged into the CSV file for every snapshot taken*/
+    public void setcurrentKey(String upComingValue){
+        currentKey = upComingValue;
     }
-    private void Awake()
-    {
-
-        snapCam = GetComponent<Camera>();
-        if (snapCam.targetTexture == null)
-        {
-            snapCam.targetTexture = new RenderTexture(resWidth, resHeight, 24);
+    /* function */
+    /* awake function runs befor the scene starts and it is used to initialize the variables of the 
+       camera and the clear shared memory directory for every time the scene runs */
+    private void Awake(){
+        snapCam = GetComponent<Camera>(); /* initialize the camera */
+        if (snapCam.targetTexture == null){
+            snapCam.targetTexture = new RenderTexture(resWidth, resHeight, 24); /* initialize the render texture which will be used to cpature the snapshots */
         }
-        if(recording)
-        {
+        if(recordingMode){
             snapCam.gameObject.SetActive(false);
         }
-        else
-        {
+        else{
             snapCam.gameObject.SetActive(true);
         }
-
-        string root = datasetParentPath+"/sharedMemory_agent#"+agentID+"/";        
-        // If directory does not exist, don't even try   
-        if (Directory.Exists(root))  
-        {  
+        /* clear the shared memory */
+        string root = datasetPath+"/sharedMemory_agent#"+agentID+"/";         
+        if (Directory.Exists(root)){  
             Directory.Delete(root,true);  
             Debug.Log("shared memory is cleared");
         }
-        
-
     }
-
-    public Boolean isRecording()
-    {
-        return recording;
+    /* function */
+    /* executed once per frame after the update function. this function is responsible for capturing the snapshots during the recording and autonomus modes.
+    */
+    void LateUpdate(){
+        string snapshotName;
+        Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
+        snapCam.Render();
+        RenderTexture.active = snapCam.targetTexture;
+        snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
+        byte[] bytes = snapShot.EncodeToJPG();
+        if(recordingMode){
+            if(snapCam.gameObject.activeInHierarchy){
+                snapshotName=snapshotNameRec();
+                System.IO.File.WriteAllBytes(snapshotName,bytes);
+            }
+        }
+        else{
+                if(autonomousMode && (--framesToSkip <= 0)){
+                    snapshotName = snapShotNameAut();
+                    framesToSkip = 2;
+                    System.IO.File.WriteAllBytes(snapshotName,bytes);
+                }
+        }
+        snapCam.gameObject.SetActive(false);
     }
-
-    public void takeSnapshot()
-    {
+    /* function */
+    /* activates the camera object to take a snapshot */
+    public void takeSnapshot(){
         snapCam.gameObject.SetActive(true);
     }
-
-
-    void LateUpdate()
-    {
-        if(recording)
-        {
-            if(snapCam.gameObject.activeInHierarchy)
-            {
-                Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
-                snapCam.Render();
-                RenderTexture.active = snapCam.targetTexture;
-                snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-                byte[] bytes = snapShot.EncodeToJPG();
-                string filename = snapShotName();
-                System.IO.File.WriteAllBytes(filename,bytes);
-                snapCam.gameObject.SetActive(false);
-            }
+    /* function */
+    /* name the snapshot during the autonomus driving mode and save it in the shared directory. by default the camera is a front caera unless the rear
+       camera flag is set then the taken snashots should flow into the sector of the rear camera in the shared memory */
+    string snapShotNameAut(){
+        snapshotPath = datasetPath+"/sharedMemory_agent#"+agentID+"/";
+        if(rearCamera){
+            snapshotPath = datasetPath+"/sharedMemory_agent#"+agentID+"/Rear/";
         }
-        else
-        {
-            if(agentIsDriving)
-            {
-                if(--frameCounter<=0)
-                {
-                Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
-                snapCam.Render();
-                RenderTexture.active = snapCam.targetTexture;
-                snapShot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-                byte[] bytes = snapShot.EncodeToJPG();
-                string filename = snapShotNameSelfDriving();
-                System.IO.File.WriteAllBytes(filename,bytes);
-                snapCam.gameObject.SetActive(false);
-                frameCounter=2;
-                }
-            }
+        String imageName = (++numericId).ToString();
+        System.IO.Directory.CreateDirectory(snapshotPath);
+        return string.Format(snapshotPath+imageName+ ".png",Application.dataPath);
+    }
+    /* function */
+    /* name the snapshot during the recording mode and save it in the correct segment of the dataset. by default the camera is a front caera unless the rear
+       camera flag is set then the taken snashots should flow into the sector of the rear camera in the shared memory.
+       this function is also responsible for logging the actions for every snapshot into the CSV file if the logInCSV flag is checked. */
+    string snapshotNameRec(){
+        snapshotPath = datasetPath+"/FinalDataset/"+datasetSector+"/"+currentTakenAction;
+        if(rearCamera){
+            snapshotPath = datasetPath+"/FinalDataset/Rear/"+datasetSector+"/"+currentTakenAction;
         }
-    }
-
-    public void setcurrentKey(String comingValue)
-    {
-        currentKey=comingValue;
-    }
-
-    string snapShotNameSelfDriving(){
-        String sessionPath;
-        sessionPath=datasetParentPath+"/sharedMemory_agent#"+agentID+"/";
-        String imageName=(++numericId).ToString();
-        System.IO.Directory.CreateDirectory(sessionPath);
-        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
-    }
-
-    string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file
-    {
-
-        //   /Users/MohamedAshraf/Desktop this is my cureent local path
-
-        String sessionPath=datasetParentPath+"/FinalDataset/"+datasetSector+"/"+currentTakenAction;
-
-        String csvFilePath="";
-        if(logActionsInCSVFile)
-        {
-            csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFile.csv";
+        if(logInCSV){
+            csvFilePath = datasetPath+"/CSV_Data/"+"CSVFile.csv";
         }
-        
-
-        System.IO.Directory.CreateDirectory(datasetParentPath);
-        System.IO.Directory.CreateDirectory(sessionPath);
-
+        System.IO.Directory.CreateDirectory(datasetPath);
+        System.IO.Directory.CreateDirectory(snapshotPath);
         numericId = numericId + 1;
-        String idTag = numericId.ToString();
-        String imageName="Session_"+sessionID+"_" + idTag ;
-
-
-        if(logActionsInCSVFile)
-        {
+        idTag = numericId.ToString();
+        imageName = "Session_"+sessionID+"_" + idTag ;
+        if(logInCSV){
             csvContent.AppendLine(imageName +","+ currentKey);
             File.AppendAllText(csvFilePath, csvContent.ToString());
-            csvContent= new StringBuilder(); // clearng the string builder
+            csvContent = new StringBuilder();
         }
-        return string.Format(sessionPath+"/"+imageName+ ".png",Application.dataPath);
-         
+        return string.Format(snapshotPath+"/"+imageName+ ".png",Application.dataPath);   
     }
 }
+/* END OF FILE */
