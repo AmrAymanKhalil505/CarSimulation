@@ -6,7 +6,6 @@ public class snapshotHelper : MonoBehaviour {
 
     public snapshotCamera snapCam;
     public obstacleCamera obsCam;
-	// Update is called once per frame
 
 	void Update () 
     {    

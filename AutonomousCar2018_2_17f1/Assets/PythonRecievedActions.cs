@@ -1,4 +1,4 @@
-﻿#Created by: Loay Naser, Mohamed Lotfy
+﻿//Created by: Loay Naser, Mohamed Lotfy
 
 
 using System.Collections.Generic;
@@ -35,7 +35,6 @@ public class PythonRecievedActions : MonoBehaviour
 			switch (words[0]) 
       		{
 				case "2":
-				    Debug.Log("right");
 					 if(m_Car.CurrentSpeed > 20.0){
                      m_Car.Move(1.0f, 0f, 0f, 0f);
                      }else{

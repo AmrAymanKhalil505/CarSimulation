@@ -10,18 +10,24 @@ using System.Text;
 
 public class obstacleCamera : MonoBehaviour {
 
-    public Boolean recording;
+    //----USER OPTIONS----------
+    public Boolean recording; // User chooses whether to record or not
+    public Boolean autonomousMode; // User chooses to start the simulator in autonomous mode or not
+    public Boolean CSVLogging; // User enables or disables CSV Logging
+    //---------------------------
+
     public Camera snapCam;
     StringBuilder csvContent = new StringBuilder();
 
-    private String datasetParentPath="C:/Users/Loai/Desktop";
+    public String datasetParentPath="Users/loai/Desktop";
     public String sessionID;
 
-    public int isObstacle;
-    private String currentKey;
+    private String currentKey; //getting current pressed key
 
+    //snapshot size
     int resWidth = 1080;
     int resHeight = 1080;
+
     int frameCounter=0;
     long numericId = -1; // Note: This number has a maximum of "9,223,372,036,854,775,807"
 
@@ -37,8 +43,6 @@ public class obstacleCamera : MonoBehaviour {
     }
     private void Awake()
     {
-        // The snapshot camera part
-
         snapCam = GetComponent<Camera>();
         if (snapCam.targetTexture == null)
         {
@@ -56,6 +60,25 @@ public class obstacleCamera : MonoBehaviour {
         else
         {
             snapCam.gameObject.SetActive(true);
+        }
+
+        String root = datasetParentPath+"/sharedMemory/";
+
+         if (Directory.Exists(root)){  
+            Directory.Delete(root,true);  
+            Debug.Log("shared memory is cleared");
+        }
+
+        if(recording){
+            autonomousMode = false;
+        }else if(!autonomousMode){
+
+            recording = true;
+
+        }else{
+
+            recording = false;
+
         }
         
 
@@ -85,8 +108,8 @@ public class obstacleCamera : MonoBehaviour {
         }
         else
         {
-            // if(--frameCounter<=0)
-            // {
+            if(autonomousMode)
+            {
                 Texture2D snapShot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
                 snapCam.Render();
                 RenderTexture.active = snapCam.targetTexture;
@@ -94,9 +117,7 @@ public class obstacleCamera : MonoBehaviour {
                 byte[] bytes = snapShot.EncodeToJPG();
                 string filename = snapShotNameSelfDriving();
                 System.IO.File.WriteAllBytes(filename,bytes);
-               // frameCounter=2;
-                // Debug.Log("SnapshotTaken");
-           // }
+           }
         }
     }
 
@@ -106,25 +127,17 @@ public class obstacleCamera : MonoBehaviour {
     }
 
     string snapShotNameSelfDriving(){
-        if(isObstacle==1){
         String sessionPath=datasetParentPath+"/sharedMemory/";
         String imageName=(++numericId).ToString();
         System.IO.Directory.CreateDirectory(sessionPath);
         return string.Format(sessionPath+imageName+".png",Application.dataPath);
-        }
-        else{
-        String sessionPath=datasetParentPath+"/sharedMemory/";
-        String imageName=(++numericId).ToString();
-        System.IO.Directory.CreateDirectory(sessionPath);
-        return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
-       }
+
     }
 
 
     string snapShotName() // give an id and a date to every snapshot and add this data to the CSV file
     {
 
-        //      /Users/MohamedAshraf/Desktop this is my cureent local path
         String sessionPath;
         String csvFilePath;
         String currentFolder="";
@@ -134,28 +147,30 @@ public class obstacleCamera : MonoBehaviour {
             case("RightArrow"): currentFolder = "right";break;
             case("LeftArrow"): currentFolder = "left";  break;
             case("DownArrow"): currentFolder = "brake"; break;
-            // case("V"): currentFolder = "stop"; break;
             default: break; 
             }
 
            
 
          sessionPath=datasetParentPath+"/ObstaclesData/"+currentFolder+"/";
-         csvFilePath=datasetParentPath+"/CSV_Data3/"+"CSVFileObstacles.csv";
+
 
         System.IO.Directory.CreateDirectory(datasetParentPath);
+       
         System.IO.Directory.CreateDirectory(sessionPath);
 
         numericId = numericId + 1;
         String idTag = numericId.ToString();
         String imageName="Session_"+sessionID+"_" + idTag ;
 
-        // Debug.Log(currentKey+"");
+    if(CSVLogging){
+        csvFilePath=datasetParentPath+"/CSV_Data/"+"CSVFileObstacles.csv";
 
+         System.IO.Directory.CreateDirectory(csvFilePath);
          csvContent.AppendLine(imageName +","+ currentKey);
          File.AppendAllText(csvFilePath, csvContent.ToString());
          csvContent= new StringBuilder(); // clearing the string builder
-
+    }
 
         return string.Format(sessionPath+imageName+ ".png",Application.dataPath);
          

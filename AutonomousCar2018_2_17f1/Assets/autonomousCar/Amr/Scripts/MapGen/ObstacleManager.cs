@@ -3,7 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//TODO documentation 
+
 public class ObstacleManager : MonoBehaviour {
 	private MapGen MG;
 
@@ -66,7 +66,7 @@ public class ObstacleManager : MonoBehaviour {
 
             x = Random.Range( tempTileset.pointsX[j].x , tempTileset.pointsY[j].x );
             z = Random.Range( tempTileset.pointsX[j].z ,  tempTileset.pointsY[j].z );
-            positionOfObs=""+x+","+z;
+            positionOfObs=""+x+","+z ;
 
            }
            positionOfObs="";
@@ -115,7 +115,7 @@ public class ObstacleManager : MonoBehaviour {
            Vector3 spawnPlace = tempTileset.RoadObj.transform.position + pos;
            Vector3 quat = new Vector3(-90,180,90);
            GameObject obstacle = Instantiate( tempTileset.obstacles[j]  , spawnPlace ,  Quaternion.Euler(tempTileset.CurRotation + quat) ) as GameObject;
-           coneCount = (coneCount==conesLimitß)?0:coneCount;
+           coneCount = (coneCount==conesLimit)?0:coneCount;
           }
 
 
@@ -185,7 +185,7 @@ public class ObstacleManager : MonoBehaviour {
           }
 
          
-        }else if(dynamicObs && tempTileset.obstacles[j].tag == "man")){ //checking user enabled dynamic obstacles only 
+        }else if(dynamicObs && tempTileset.obstacles[j].tag == "man"){ //checking user enabled dynamic obstacles only 
            
            while(tempTileset.spawnedIn.ContainsKey(positionOfObs)){
 
