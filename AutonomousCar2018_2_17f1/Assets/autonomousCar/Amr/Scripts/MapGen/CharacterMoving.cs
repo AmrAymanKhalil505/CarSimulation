@@ -1,3 +1,5 @@
+//Created by: Loay Naser
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +10,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class CharacterMoving : MonoBehaviour {
 
     Animator m_Animator;
-
-
 
 	[Header("NavMesh")]
 	
@@ -36,13 +36,8 @@ public class CharacterMoving : MonoBehaviour {
 
 	private CarController cc;
 
-	int moving=0;
-//    public CarController m_Car;
-  
-    // public AudioSource soundEffect;
 
 	void Start () {
-		//TODO Check if there is NMA 
 		NMA = GetComponent<NavMeshAgent>();
 		Invoke("ActivateNavMesh",3f);	
         NMA.updateRotation = false;
@@ -51,7 +46,7 @@ public class CharacterMoving : MonoBehaviour {
 	}
 
 	void Update () {
-		theCarPos = GameObject.Find("Car").transform.position;
+		theCarPos = GameObject.Find("Car").transform.position; //getting the current position of the Car agent
         if(isOnRoadNavMesh){
 			CheckWaypointDistance();
 		}
@@ -72,7 +67,6 @@ public class CharacterMoving : MonoBehaviour {
 	void ActivateNavMesh(){
         spawn = transform.position ;
         rotation = transform.rotation;
-       
 		isOnRoadNavMesh= true;
 		NMA.enabled=true;
 		NMA.isStopped = false;
@@ -81,71 +75,47 @@ public class CharacterMoving : MonoBehaviour {
 	}
 
 	private void CheckWaypointDistance() {
-		Vector3 Pos_with_noy = transform.position;
-		//Debug.Log(moving);
-     
+		 /* This function does two things :
+		  1-  checking the distance between the character and the destination 
+		  2-  checking the distance between the character and the car agent to prevent unreal collision  */ 
 
-         Vector3 target = Pos_with_noy - spawn;
-		//  Debug.Log("here x"+ (Mathf.Abs(target.x)-Mathf.Abs(spawn.x)));
-        //   Debug.Log("here z"+ (Mathf.Abs(Mathf.Abs(target.x)-Mathf.Abs(spawn.x))>Mathf.Abs(Mathf.Abs(target.z)-Mathf.Abs(spawn.z))));
-	    //  if(moving == 10){
+		Vector3 Pos_with_noy = transform.position; // getting the current position of the character
 
-        //  if(Mathf.Abs(target.x-spawn.x)>Mathf.Abs(target.z-spawn.z)){
-		// 			Debug.Log("hey there");
-		// 			checkX = true;
-
-		//  }else{
-				
-        //             Debug.Log("shishsish");
-		// 			checkZ = true;
-				
-		//  }
-		//  }
-
-		
-	    // Debug.Log("current" +Pos_with_noy);
-		//  Debug.Log("spawn" + spawn);
-		// Debug.Log("dest" + dest);
 		bool check = ((Mathf.Abs(theCarPos.z - Pos_with_noy.z ) < 3.5 ) &&
-		Mathf.Abs(theCarPos.x - Pos_with_noy.x ) < 1 ) ;
-		//  ||
-		// ((theCarPos.x <= Pos_with_noy.x + 3.5 && theCarPos.x >= Pos_with_noy.x - 3.5) && 
-		// Mathf.Abs(theCarPos.z - Pos_with_noy.z ) < 1  && checkX );
+					  Mathf.Abs(theCarPos.x - Pos_with_noy.x ) < 1 ) ; // checking the distance between the character and car agent
+
          if (NMA.isActiveAndEnabled)	{
-		NMA.SetDestination(temp);
-        nearbyCar = false;
-		person.logStop(nearbyCar);
+
+			NMA.SetDestination(temp);
+			nearbyCar = false;
+			person.logStop(nearbyCar);
+
 		 }
 
 		if(check){
+
            	if (NMA.isActiveAndEnabled)	{
-		   nearbyCar = true;
-           person.logStop(nearbyCar);
-		   NMA.SetDestination(Pos_with_noy);
+
+				nearbyCar = true;
+				person.logStop(nearbyCar);
+				NMA.SetDestination(Pos_with_noy);
+
           }
 		}else{
-		if (Vector3.Distance(dest, Pos_with_noy ) < nearNodeLimit) {
+		if (Vector3.Distance(dest, Pos_with_noy ) < nearNodeLimit) { // checking if the character reached it's destination
 
 			if (NMA.isActiveAndEnabled)	{
 			   	temp = spawn;
                 NMA.SetDestination(spawn);
+				}	
 				}
-				
-				
-				
-				}
-			 else if(Vector3.Distance( Pos_with_noy , spawn ) < nearNodeLimit){
-               
-			  
-	
+			 else if(Vector3.Distance( Pos_with_noy , spawn ) < nearNodeLimit){ // checking if the character reached it's destination
+
 				if (NMA.isActiveAndEnabled)	{
 					temp = dest;
 					NMA.SetDestination(dest);
 		
 					}
-
-
-
 			 }else if ((theCarPos.z <= Pos_with_noy.z+5 && theCarPos.z >= Pos_with_noy.z - 5 )&& checkZ ){
 		    	if (NMA.isActiveAndEnabled)	{
 				
@@ -156,7 +126,6 @@ public class CharacterMoving : MonoBehaviour {
 				}
 			 }
           }
-		  moving++;
 	}
 	
 

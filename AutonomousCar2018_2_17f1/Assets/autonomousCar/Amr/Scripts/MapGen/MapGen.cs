@@ -42,9 +42,7 @@ public class MapGen : MonoBehaviour {
     public bool activeStaticObs;
 
      public bool activeTraffic;
-	//TODO checking TM is null
 	TrafficManager TM ;
-	//DynamicObstacle DO ;
 	ObstacleManager OM;
 	void Start () {
 		AvailableRoads=new ArrayList();

@@ -1,3 +1,4 @@
+//Names: Loay Naser
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -30,8 +31,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
-        bool accident;
- 		bool nearCar;
+        bool accident; // check if the accident has happened
+ 		bool nearCar; // check if these is a nearby car
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
@@ -56,8 +57,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
-			// Debug.Log(crouch);
-			// Debug.Log(jump);
+
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:
@@ -77,17 +77,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			UpdateAnimator(move);
 		}
 
-		// void OnCollisionEnter(Collision collision)
-        //   {
-        //  Debug.Log(collision.gameObject.tag);
-        //  if(collision.gameObject.tag=="Player"){
-        //        // accident = true;
-        //       // Destroy(gameObject);
-		// 	  Debug.Log("boy");
-  
 
-        // }
-        // }
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
 			if (m_IsGrounded && crouch)
@@ -140,10 +130,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
-			//Debug.Log("forward"+m_ForwardAmount);
 			if(nearCar){
-            	m_Animator.SetFloat("Forward",0f, 0f, Time.deltaTime);
-					m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("Forward",0f, 0f, Time.deltaTime);
+			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", true);
 

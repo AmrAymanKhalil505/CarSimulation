@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class snapshotHelper : MonoBehaviour {
 
-    public snapshotCamera snapCam;
-    public obstacleCamera obsCam;
-	// Update is called once per frame
+    public obstacleCamera obsCam1;
+    public obstacleCamera obsCam2;
 
 	void Update () 
     {    
@@ -15,11 +14,11 @@ public class snapshotHelper : MonoBehaviour {
                  string keyName=vKey+"";
                  if(keyName.CompareTo("UpArrow")==0 || keyName.CompareTo("DownArrow")==0 || keyName.CompareTo("LeftArrow")==0 || keyName.CompareTo("RightArrow")==0)
                  {
-                    // snapCam.setcurrentKey(vKey+"");
-                    // snapCam.takeSnapshot();
+                    obsCam1.setcurrentKey(vKey+"");
+                    obsCam1.takeSnapshot();
 
-                    obsCam.setcurrentKey(vKey+"");
-                    obsCam.takeSnapshot();
+                    obsCam2.setcurrentKey(vKey+"");
+                    obsCam2.takeSnapshot();
                  } 
              }
          }
