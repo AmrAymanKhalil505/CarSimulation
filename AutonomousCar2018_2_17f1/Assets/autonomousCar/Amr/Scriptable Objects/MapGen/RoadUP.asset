@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4126df550c4f34d98a5444f20405c6, type: 3}
+  m_Name: RoadUP
+  m_EditorClassIdentifier: 
+  RoadObj: {fileID: 1463424688480794, guid: 3af937b09668347d79f07ed7ccd4703b, type: 2}
+  RoadName: Ahead
+  Percentage: 1
+  SizeMin: {x: -28, y: 0, z: -28}
+  SizeMax: {x: 28, y: 0, z: 28}
+  CorrectPosition: {x: 0, y: 0, z: 0}
+  OffestInToCenter: 30
+  OffestOutToCenter: 30
+  DirectionIn: {x: 0, y: 0, z: 0}
+  DirectionOut: {x: 0, y: 0, z: 0}
+  CurPosition: {x: 0, y: 0, z: 0}
+  CurRotation: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
+  initRotation: {x: -90, y: 90, z: 0}
+  SuitableNextTileSet:
+  - Ahead
+  - Right
+  - Left
+  - Cross
+  TrafficNodes:
+  - {x: 0, y: 0, z: -30}
+  - {x: 0, y: 0, z: 30}
+  LengthRight: 15
+  LengthLeft: 15
+  NumLerpNodes: 3
+  isBezierCurve: 0
+  TrafficBNodes: []
+  TrafficBRNodes: []
+  obstacles:
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 117212, guid: cd245e07bc37d3e43b84d3e2005e68cc, type: 2}
+  - {fileID: 117212, guid: cd245e07bc37d3e43b84d3e2005e68cc, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 176578, guid: 4977aa108b66f994dac699f875b017d6, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 123788, guid: 8fe305540cd375b43b694214799058bf, type: 2}
+  - {fileID: 1977796281193266, guid: c03d7a141f014664fa3e50871bc681a8, type: 2}
+  - {fileID: 1977796281193266, guid: c03d7a141f014664fa3e50871bc681a8, type: 2}
+  pointsX:
+  - {x: 0, y: 0, z: 31}
+  - {x: -14.2, y: 0, z: 29}
+  - {x: -14.2, y: 0, z: 29}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: 0, y: 0, z: 31}
+  - {x: -6.7, y: 0, z: 26}
+  - {x: 6.7, y: 0, z: 26}
+  pointsY:
+  - {x: 0, y: 0, z: -31}
+  - {x: 11, y: 0, z: -31}
+  - {x: 11, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: 0, y: 0, z: -31}
+  - {x: -6.7, y: 0, z: -26}
+  - {x: 6.7, y: 0, z: -26}
+  count: 

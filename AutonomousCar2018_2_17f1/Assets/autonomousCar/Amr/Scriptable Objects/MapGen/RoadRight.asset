@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: RoadRight
+  m_EditorClassIdentifier: Assembly-CSharp::RoadSTObject
+  RoadObj: {fileID: 1380392469585970, guid: e2f573769a3a34f1fa4ede1da1e36bf3, type: 2}
+  RoadName: Right
+  Percentage: 1
+  SizeMin: {x: -28, y: 0, z: -28}
+  SizeMax: {x: 28, y: 0, z: 28}
+  CorrectPosition: {x: 0, y: 0, z: 0}
+  OffestInToCenter: 30
+  OffestOutToCenter: 30
+  DirectionIn: {x: 0, y: 0, z: 0}
+  DirectionOut: {x: 0, y: 90, z: 0}
+  CurPosition: {x: 0, y: 0, z: 0}
+  CurRotation: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
+  initRotation: {x: -90, y: 90, z: 0}
+  SuitableNextTileSet:
+  - Ahead
+  - Cross
+  - Left
+  - Right
+  TrafficNodes:
+  - {x: 0, y: 0, z: -30}
+  - {x: 0, y: 0, z: 0}
+  - {x: 30, y: 0, z: 0}
+  LengthRight: 15
+  LengthLeft: 15
+  NumLerpNodes: 5
+  isBezierCurve: 1
+  TrafficBNodes:
+  - {x: 0, y: 0, z: -30}
+  - {x: 0, y: 0, z: 0}
+  - {x: 30, y: 0, z: 0}
+  TrafficBRNodes:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  obstacles:
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  - {fileID: 1833020897958878, guid: 341b822e1557ceb42a7ae2a15375c6a4, type: 2}
+  pointsX:
+  - {x: 12, y: 0, z: -32}
+  - {x: 12, y: 0, z: -35}
+  - {x: 12, y: 0, z: -32}
+  - {x: 12, y: 0, z: -35}
+  - {x: 12, y: 0, z: -32}
+  pointsY:
+  - {x: -14, y: 0, z: 9.7}
+  - {x: -13, y: 0, z: 9.5}
+  - {x: -14, y: 0, z: 9.7}
+  - {x: -13, y: 0, z: 9.5}
+  - {x: -14, y: 0, z: 9.7}
+  count: 
